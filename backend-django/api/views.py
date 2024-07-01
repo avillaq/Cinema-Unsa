@@ -12,13 +12,19 @@ class PeliculaDetalle(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pelicula.objects.all()
     serializer_class = PeliculaSerializer
 
-class FuncionLista(generics.ListCreateAPIView):
-    queryset = Funcion.objects.all()
+class FuncionListaPorPelicula(generics.ListCreateAPIView):
     serializer_class = FuncionSerializer
 
-class FuncionDetalle(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Funcion.objects.all()
+    def get_queryset(self):
+        pelicula_id = self.kwargs['pelicula_id']
+        return Funcion.objects.filter(pelicula_id=pelicula_id)
+
+class FuncionDetallePorPelicula(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FuncionSerializer
+
+    def get_queryset(self):
+        pelicula_id = self.kwargs['pelicula_id']
+        return Funcion.objects.filter(pelicula_id=pelicula_id)
 
 class BoletoLista(generics.ListCreateAPIView):
     queryset = Boleto.objects.all()
