@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Pelicula(models.Model):
@@ -20,3 +21,12 @@ class Funcion(models.Model):
 
     def __str__(self):
         return f"{self.pelicula.titulo} - {self.horario}"
+
+class Boleto(models.Model):
+    funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    asiento = models.CharField(max_length=10)
+    fecha_compra = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.funcion.pelicula.titulo} - {self.asiento} - {self.usuario.username}"
