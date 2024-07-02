@@ -1,4 +1,5 @@
-import { Component, Input,OnInit, numberAttribute } from '@angular/core';
+import { Component, Input,OnInit, numberAttribute,NgModule } from '@angular/core';
+// import { CommonModule } from '@angular/common';
 import { PeliculasService } from '../peliculas.service';
 import { DatePipe } from '@angular/common';
 import { FuncionesService } from '../funciones.service';
