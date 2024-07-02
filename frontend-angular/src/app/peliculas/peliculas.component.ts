@@ -14,6 +14,7 @@ export class PeliculasComponent {
   constructor(private peliculaService: PeliculasService) {
     this.peliculas = this.peliculaService.getPeliculas().subscribe(data => {
       this.peliculas = data;
+      console.log(this.peliculas);
     });
   }
 }

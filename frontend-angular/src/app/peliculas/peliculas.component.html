@@ -1,23 +1,20 @@
 <section class="text-gray-600 body-font max-w-7xl mx-auto">
     <div class="container px-5 py-10 mx-auto">
       <div class="flex flex-wrap -m-4">
-
-
         @for (item of peliculas; track $index) {
-          <div class="lg:w-1/4 md:w-1/3 p-4 w-full"> <!-- Ajuste en el ancho -->
-            <a class="block relative h-96 rounded overflow-hidden"> <!-- Aumento de la altura -->
-              <img alt="ecommerce" class="object-cover object-center w-full h-full block" src={{item.poster_url}}>
-            </a>
-            <div class="mt-4">
-              <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{item.director}}</h3>
-              <h2 class="text-gray-900 title-font text-lg font-medium">{{item.titulo}}</h2>
-              <a class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full inline-block my-2 cursor-pointer" [routerLink]="['/peliculas', item.id]">
-                Ver Detalle
+            <div class="lg:w-1/4 md:w-1/3 p-4 w-full"> <!-- Ajuste en el ancho -->
+              <a class="block relative h-96 rounded overflow-hidden"> <!-- Aumento de la altura -->
+                <img alt="ecommerce" class="object-cover object-center w-full h-full block" src={{item.poster_url}}>
               </a>
+              <div class="mt-4">
+                <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{item.director}}</h3>
+                <h2 class="text-gray-900 title-font text-lg font-medium">{{item.titulo}}</h2>
+                <a class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 rounded-full inline-block my-2 cursor-pointer" [routerLink]="['/peliculas', item.id]">
+                  Ver Detalle
+                </a>
+              </div>
             </div>
-          </div>
-        }
-
+          }
       </div>
     </div>
   </section>
