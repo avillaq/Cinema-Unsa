@@ -17,12 +17,13 @@ export class DetalleComponent implements OnInit{
   funciones: any = [];
   constructor(private PeliculaService: PeliculasService, private FuncionesService: FuncionesService) {}
 
+
   ngOnInit() {
     this.PeliculaService.getPelicula(this.pelicula_id).subscribe(data => {
       this.pelicula = data;
     });
     this.FuncionesService.getFunciones(this.pelicula_id).subscribe(data => {
-      this.funciones = this.agruparFuncionesPorFecha(data);
+      this.funciones = data;
       console.log(this.funciones);
     });
 

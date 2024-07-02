@@ -21,25 +21,14 @@
       </div>
       <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center flex-col ">
         <h1 class="text-gray-900 text-3xl title-font font-medium my-10">Proximas Funciones</h1>
-        <!-- @for (item of Detalle; track $index){
+        @for (item of funciones; track $index){
             <p class="title-font font-medium text-xl text-gray-900 mb-4">{{ funciones[0].horario | date: 'fullDate' }}</p>
         <div class="flex gap-2">
           <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full">
             {{ funciones[0].horario | date: 'shortTime' }}
           </button>
         </div>
-
-        } -->
-
-        <ul>
-            <li *ngFor = "let funcion of FuncionesService">
-{{funcion}}
-            </li>
-        </ul>
-
-
-
-          
+      }  
         <p class="title-font font-medium text-xl text-gray-900 mb-4">{{ funciones[0].horario | date: 'fullDate' }}</p>
         <div class="flex gap-2">
           <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full">
