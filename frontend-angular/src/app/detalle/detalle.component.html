@@ -1,43 +1,31 @@
-<section class="text-gray-600 body-font overflow-hidden">
-    <div class="container px-5 py-10 mx-auto">
-      <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center">
-        <img alt="ecommerce" class="lg:w-1/4 w-1/2 lg:h-auto h-auto object-cover object-center rounded"
-          [src]="pelicula.poster_url">
-        <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ pelicula.titulo }}</h1>
-  
-          <p class="leading-relaxed">{{ pelicula.descripcion }}</p>
-  
-          <div class="flex mt-2 gap-1">
-              <span class="title-font font-medium text-base text-gray-900">Director: </span>
-              <p class="title-font text-base text-gray-600"> {{ pelicula.director }}</p>
-          </div>
-          <div class="flex gap-1">
-            <span class="title-font font-medium text-base text-gray-900">Duración: </span>
-            <p class="title-font text-base text-gray-600"> {{ pelicula.duracion }} minutos</p>
-          </div>
-        </div>
-        
+<main class=" flex flex-col gap-4  min-h-dvh justify-around text-gray-600 body-font overflow-hidden">
+  <section class="flex flex-col md:flex-row w-[80%] mx-auto justify-center items-center">
+    <img alt="ecommerce" class="lg:w-1/4 w-1/2 lg:h-auto h-auto object-cover object-center rounded" [src]="pelicula.poster_url">
+    <div class=" flex flex-col w-[80%] md:w-full p-4">
+      <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ pelicula.titulo }}</h1>
+      <p class="leading-relaxed">{{ pelicula.descripcion }}</p>
+      <div class="flex mt-2 gap-1">
+        <span class="title-font font-medium text-base text-gray-900">Director: </span>
+        <p class="title-font text-base text-gray-600"> {{ pelicula.director }}</p>
       </div>
-      <div class="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center flex-col ">
-        <h1 class="text-gray-900 text-3xl title-font font-medium my-10">Proximas Funciones</h1>
-        @for (item of funciones; track $index){
-            <p class="title-font font-medium text-xl text-gray-900 mb-4">{{ funciones[0].horario | date: 'fullDate' }}</p>
-        <div class="flex gap-2">
-          <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full">
-            {{ funciones[0].horario | date: 'shortTime' }}
-          </button>
-        </div>
-      }  
-        <p class="title-font font-medium text-xl text-gray-900 mb-4">{{ funciones[0].horario | date: 'fullDate' }}</p>
-        <div class="flex gap-2">
-          <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full">
-            {{ funciones[0].horario | date: 'shortTime' }}
-          </button>
-        </div>
-  
-  
+      <div class="flex gap-1">
+        <span class="title-font font-medium text-base text-gray-900">Duración: </span>
+        <p class="title-font text-base text-gray-600"> {{ pelicula.duracion }} minutos</p>
       </div>
-  
     </div>
   </section>
+  <section class="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center flex-col p-4">
+    <h1 class="text-gray-900 text-3xl title-font font-medium my-10">Próximas Funciones</h1>
+    @for (funcion of funciones; track $index) {
+    <p class="title-font
+                font-medium text-xl text-gray-900 mb-4">{{ funcion.fecha }}</p>
+    <div class="flex gap-2">
+      @for (funcionDiaria of funcion.funciones; track $index){
+      <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full">{{ funcionDiaria.horario }}</button>
+      }
+    </div>
+    } @empty {
+    <li>There are no items.</li>
+    }
+  </section>
+</main>
