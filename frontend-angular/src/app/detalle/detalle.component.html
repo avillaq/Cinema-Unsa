@@ -18,11 +18,11 @@
     <h1 class="text-gray-900 text-3xl title-font font-medium my-10">Próximas Funciones</h1>
     @for (funcion of funciones; track $index) {
     <p class="title-font
-                font-medium text-xl text-gray-900 mb-4">{{ funcion.fecha }}</p>
+                font-medium text-xl text-gray-900 mb-4">{{ funcion.fecha}}</p>
     <div class="flex gap-2">
       @for (funcionDiaria of funcion.funciones; track $index){
-      <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full">{{ funcionDiaria.horario }}</button>
-      }
+      <a class ="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full" [routerLink]="['/peliculas', pelicula.id, 'funciones', funcionDiaria.id]">{{ funcionDiaria.horario }}</a>
+       }
     </div>
     } @empty {
     <li>There are no items.</li>
