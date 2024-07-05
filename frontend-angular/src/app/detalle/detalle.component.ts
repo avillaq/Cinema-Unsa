@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'; // Importamos lo neces
 import { PeliculasService } from '../peliculas.service'; // Importamos el servicio de películas
 import { DatePipe } from '@angular/common'; // Importamos DatePipe para formatear fechas
 import { FuncionesService } from '../funciones.service'; // Importamos el servicio de funciones
+import { RouterLink } from '@angular/router';
 
 // Definimos una interfaz para las funciones de películas
 interface Funcion {
@@ -9,14 +10,13 @@ interface Funcion {
   horario: string; // Horario de la función en formato de string
   pelicula: number; // Identificador de la película asociada
   sala: number; // Identificador de la sala donde se proyecta la película
-  [key: string]: any; // Otras propiedades adicionales
 }
 
 // Definimos el componente DetalleComponent
 @Component({
   selector: 'app-detalle', // Nombre del selector para usar este componente en HTML
   standalone: true, // Indica que el componente es autónomo
-  imports: [DatePipe], // Importa DatePipe para usar en el template
+  imports: [DatePipe, RouterLink], // Importa DatePipe para usar en el template
   templateUrl: './detalle.component.html', // Ruta al archivo de template HTML
   styleUrl: './detalle.component.css' // Ruta al archivo de estilos CSS
 })
