@@ -30,4 +30,22 @@ export class FuncionDetalleComponent {
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
   }
 
+  // Variables y Funciones para la selección de asientos (1 paso del stepper)
+
+  listaAsientosSeleccionados: any []= [];
+  numeroAsientosSeleccionados: number = 0;
+
+  getArregloAsientos (totalAsientos:any) { 
+    let arregloAsientos = [];
+    for (let index = 1; index <= totalAsientos; index++) {
+      arregloAsientos.push(index)
+    }
+    return arregloAsientos;
+  }
+
+
+
+
+
+
 }
