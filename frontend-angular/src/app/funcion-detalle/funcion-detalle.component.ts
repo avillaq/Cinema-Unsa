@@ -43,6 +43,23 @@ export class FuncionDetalleComponent {
     return arregloAsientos;
   }
 
+  reservarAsiento(letraFila:any, numeroAsiento:any) {
+    // Si el asiento NO está reservado, se agrega a la lista de asientos reservados
+    if(!this.revisarAsientoReservado(letraFila,numeroAsiento)) {
+      
+      const asiento = {
+        letraFila: letraFila,
+        numeroAsiento: numeroAsiento
+      };
+      this.listaAsientosSeleccionados.push(asiento)
+      this.numeroAsientosSeleccionados++;
+
+    } else {  // Si el asiento ya está reservado, se elimina de la lista de asientos reservados
+      const indice =  this.listaAsientosSeleccionados.findIndex(m=>m.letraFila === letraFila && m.numeroAsiento === numeroAsiento);
+      this.listaAsientosSeleccionados.splice(indice,1) 
+      this.numeroAsientosSeleccionados--;
+    } 
+  }
 
   revisarAsientoReservado(letraFila:any,numeroAsiento:any) {
     const datoReserva =  this.listaAsientosSeleccionados.find(m=>m.letraFila === letraFila && m.numeroAsiento === numeroAsiento);
