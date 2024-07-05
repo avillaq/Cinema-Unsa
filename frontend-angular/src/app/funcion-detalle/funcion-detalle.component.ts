@@ -44,6 +44,14 @@ export class FuncionDetalleComponent {
   }
 
 
+  revisarAsientoReservado(letraFila:any,numeroAsiento:any) {
+    const datoReserva =  this.listaAsientosSeleccionados.find(m=>m.letraFila === letraFila && m.numeroAsiento === numeroAsiento);
+    if(datoReserva == undefined) {
+      return false
+    }  
+    return true;
+  }
+
 
 
 
