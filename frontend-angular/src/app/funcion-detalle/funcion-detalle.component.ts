@@ -34,6 +34,7 @@ export class FuncionDetalleComponent {
 
   listaAsientosSeleccionados: any []= [];
   numeroAsientosSeleccionados: number = 0;
+  codigosAsientosSeleccionados: string = '';
 
   getArregloAsientos (totalAsientos:any) { 
     let arregloAsientos = [];
