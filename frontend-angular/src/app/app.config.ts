@@ -8,10 +8,11 @@ import { appRoutes } from './app.routes';
 import {LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(appRoutes,withComponentInputBinding()), provideHttpClient(),  { provide: LOCALE_ID, useValue: 'es' }]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(appRoutes,withComponentInputBinding()), provideHttpClient(),  { provide: LOCALE_ID, useValue: 'es' }, provideAnimationsAsync()]
 };
 
 
