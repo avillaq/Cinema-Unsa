@@ -54,11 +54,13 @@ export class FuncionDetalleComponent {
       };
       this.listaAsientosSeleccionados.push(asiento)
       this.numeroAsientosSeleccionados++;
+      this.mostrarCodigoAsientosSeleccionados();
 
     } else {  // Si el asiento ya está reservado, se elimina de la lista de asientos reservados
       const indice =  this.listaAsientosSeleccionados.findIndex(m=>m.letraFila === letraFila && m.numeroAsiento === numeroAsiento);
       this.listaAsientosSeleccionados.splice(indice,1) 
       this.numeroAsientosSeleccionados--;
+      this.mostrarCodigoAsientosSeleccionados();
     } 
   }
 
@@ -70,7 +72,13 @@ export class FuncionDetalleComponent {
     return true;
   }
 
-
+  mostrarCodigoAsientosSeleccionados() {
+    this.codigosAsientosSeleccionados = '';
+    this.listaAsientosSeleccionados.forEach(asiento => {
+      this.codigosAsientosSeleccionados += asiento.letraFila + asiento.numeroAsiento + ', ';
+    });
+    this.codigosAsientosSeleccionados = this.codigosAsientosSeleccionados.slice(0, -2);
+  }
 
 
 
