@@ -62,20 +62,24 @@ export class FuncionDetalleComponent implements OnInit{
   });
 
   ngOnInit() {
+    // Obtnecion de la información de la pelicula y la funcion
     this.peliculasService.getPelicula(this.pelicula_id).subscribe((data: any) => {
       this.titulo = data.titulo;
       this.descripcion = data.descripcion;
       this.imagen = data.poster_url;
 
     });
+    this.funcionesService.getFuncion(this.pelicula_id, this.funcion_id).subscribe((data: any) => {
+      let date = new Date(data.horario);
+      
+      // Formateo de la fecha
+      this.fecha = date.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+    
+      // Formateo de la hora
+      this.hora = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-    this.funcionesService.getFuncion(this.pelicula_id,this.funcion_id).subscribe((data: any) => {
       this.sala = data.sala;
-      this.fecha = data.horario;
-      this.hora = data.horario;
     });
-    this.fecha = "15 de Julio, 2027";
-    this.hora = "7:00 PM";
 
     // (3 paso) Validación del formulario de pago  
     this.formulario = this.formBuilder.group({
