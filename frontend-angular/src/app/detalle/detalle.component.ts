@@ -60,13 +60,12 @@ export class DetalleComponent implements OnInit { // Clase del componente que im
   ngOnInit() {
     // Llamada al servicio para obtener los detalles de la película
     this.PeliculaService.getPelicula(this.pelicula_id).subscribe(data => {
-      this.pelicula = data; // Asignamos los datos de la película a la propiedad
+      this.pelicula = data; 
     });
 
     // Llamada al servicio para obtener las funciones de la película
     this.FuncionesService.getFunciones(this.pelicula_id).subscribe((data: Object) => {
       this.funciones = this.agruparFuncionesPorFecha(data as Funcion[]); // Agrupamos las funciones por fecha
-      console.log(this.funciones, typeof (this.funciones)); // Imprimimos las funciones en consola para depuración
     });
   }
 }

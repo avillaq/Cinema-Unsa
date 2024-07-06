@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
@@ -7,7 +7,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
-import { OnInit } from '@angular/core';
+
+import { FuncionesService } from '../funciones.service';
+import { PeliculasService } from '../peliculas.service';
 
 @Component({
   selector: 'app-funcion-detalle',
@@ -29,7 +31,7 @@ export class FuncionDetalleComponent implements OnInit{
   stepperOrientation: Observable<StepperOrientation>;
 
   // Constructor que se encarga de la orientación del stepper: horizontal o vertical
-  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, ) {
+  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private funcionesService: FuncionesService, private peliculasService: PeliculasService) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -39,15 +41,18 @@ export class FuncionDetalleComponent implements OnInit{
   titulo: string = '';
   descripcion: string = '';
   imagen: string = '';
-  sala: string = '06';
+  sala: string = '';
   asientos: any[] = [
     {fila:'A', totalAsientos: 8},
     {fila:'B', totalAsientos: 8},
     {fila:'C', totalAsientos: 8}, 
     {fila:'D', totalAsientos: 8}
   ];
-  fecha = "15 de Julio, 2027";
-  hora = "7:00 PM";
+  fecha = "";
+  hora = "";
+
+  @Input("pelicula_id") pelicula_id: number = 0;
+  @Input("funcion_id") funcion_id: number = 0;
 
 
   // (3 paso) Formulario para el pago de los boletos 
@@ -57,6 +62,25 @@ export class FuncionDetalleComponent implements OnInit{
   });
 
   ngOnInit() {
+    // Obtnecion de la información de la pelicula y la funcion
+    this.peliculasService.getPelicula(this.pelicula_id).subscribe((data: any) => {
+      this.titulo = data.titulo;
+      this.descripcion = data.descripcion;
+      this.imagen = data.poster_url;
+
+    });
+    this.funcionesService.getFuncion(this.pelicula_id, this.funcion_id).subscribe((data: any) => {
+      let date = new Date(data.horario);
+      
+      // Formateo de la fecha
+      this.fecha = date.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+    
+      // Formateo de la hora
+      this.hora = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+      this.sala = data.sala;
+    });
+
     // (3 paso) Validación del formulario de pago  
     this.formulario = this.formBuilder.group({
       nombre: ['', [Validators.required]],
@@ -160,18 +184,24 @@ export class FuncionDetalleComponent implements OnInit{
   // (3 paso)
   onSubmit(): void {
     if (this.formulario.valid) {
-      console.log("Datos del formulario");
-      console.log(this.formulario.value.nombre);
-      console.log(this.formulario.value.correo);
-      console.log("Pelicula: " + this.titulo);
-      console.log("Sala: " + this.sala);
-      console.log("fecha: " + this.fecha);
-      console.log("Hora: " + this.hora);
-      console.log("Tipo de boletos: Adultos: " + this.contidadBoletosAdultos + " Niños: " + this.contidadBoletosNinos);
-      console.log("Asientos: " + this.codigosAsientosSeleccionados);
-      console.log("Total a pagar: " + this.pagoTotal);
-
+      let DatosCompra = {
+        nombre: this.formulario.value.nombre,
+        correo: this.formulario.value.correo,
+        pelicula: this.titulo,
+        sala: this.sala,
+        fecha: this.fecha,
+        hora: this.hora,
+        boletos: {
+          adultos: this.contidadBoletosAdultos,
+          ninos: this.contidadBoletosNinos
+        },
+        asientos: this.codigosAsientosSeleccionados,
+        total: this.pagoTotal
+      }
+      console.log(DatosCompra);
       alert("Boletos Comprados Exitosamente!");
+    } else {
+      alert("Por favor, llena todos los campos");
     }
   }
 
