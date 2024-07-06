@@ -105,4 +105,20 @@ export class FuncionDetalleComponent {
   contidadBoletosAdultos: number = 0;
   contidadBoletosNinos: number = 0;
 
+
+  aumentarCantidadBoletos(tipo: string) {
+    const totalBoletos = this.contidadBoletosAdultos + this.contidadBoletosNinos;
+    if (totalBoletos < this.numeroAsientosSeleccionados) {
+      if (tipo === 'adultos') {
+        this.contidadBoletosAdultos++;
+      } else if (tipo === 'ninos'){
+        this.contidadBoletosNinos++;
+      }
+    }
+
+  }
+
+
+
+
 }
