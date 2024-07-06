@@ -184,18 +184,24 @@ export class FuncionDetalleComponent implements OnInit{
   // (3 paso)
   onSubmit(): void {
     if (this.formulario.valid) {
-      console.log("Datos del formulario");
-      console.log(this.formulario.value.nombre);
-      console.log(this.formulario.value.correo);
-      console.log("Pelicula: " + this.titulo);
-      console.log("Sala: " + this.sala);
-      console.log("fecha: " + this.fecha);
-      console.log("Hora: " + this.hora);
-      console.log("Tipo de boletos: Adultos: " + this.contidadBoletosAdultos + " Niños: " + this.contidadBoletosNinos);
-      console.log("Asientos: " + this.codigosAsientosSeleccionados);
-      console.log("Total a pagar: " + this.pagoTotal);
-
+      let DatosCompra = {
+        nombre: this.formulario.value.nombre,
+        correo: this.formulario.value.correo,
+        pelicula: this.titulo,
+        sala: this.sala,
+        fecha: this.fecha,
+        hora: this.hora,
+        boletos: {
+          adultos: this.contidadBoletosAdultos,
+          ninos: this.contidadBoletosNinos
+        },
+        asientos: this.codigosAsientosSeleccionados,
+        total: this.pagoTotal
+      }
+      console.log(DatosCompra);
       alert("Boletos Comprados Exitosamente!");
+    } else {
+      alert("Por favor, llena todos los campos");
     }
   }
 
