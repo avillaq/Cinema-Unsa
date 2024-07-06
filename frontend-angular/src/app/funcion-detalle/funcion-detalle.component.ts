@@ -102,6 +102,9 @@ export class FuncionDetalleComponent {
   }
 
   // (2 paso)
+  precioBoletoAdulto: number = 10.0;
+  precioBoletoNino: number = 5.0;
+
   contidadBoletosAdultos: number = 0;
   contidadBoletosNinos: number = 0;
 
