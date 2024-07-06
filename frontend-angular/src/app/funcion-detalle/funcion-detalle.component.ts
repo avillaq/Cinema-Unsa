@@ -9,6 +9,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
 import { OnInit } from '@angular/core';
 
+import { FuncionesService } from '../funciones.service';
+import { PeliculasService } from '../peliculas.service';
+
 @Component({
   selector: 'app-funcion-detalle',
   standalone: true,
@@ -29,7 +32,7 @@ export class FuncionDetalleComponent implements OnInit{
   stepperOrientation: Observable<StepperOrientation>;
 
   // Constructor que se encarga de la orientación del stepper: horizontal o vertical
-  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, ) {
+  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private funcionesService: FuncionesService, private peliculasService: PeliculasService) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -49,6 +52,8 @@ export class FuncionDetalleComponent implements OnInit{
   fecha = "";
   hora = "";
 
+  
+
 
   // (3 paso) Formulario para el pago de los boletos 
   formulario: FormGroup = new FormGroup({
@@ -57,6 +62,16 @@ export class FuncionDetalleComponent implements OnInit{
   });
 
   ngOnInit() {
+    this.peliculasService.getPelicula(3).subscribe((data: any) => {
+      console.log(data);
+    });
+
+    this.funcionesService.getFuncion(3,4).subscribe((data: any) => {
+      console.log(data);
+      
+    });
+
+
     this.titulo = 'Este es un titulo';
     this.descripcion = 'La descripcion es este , fecha, hora .  La descripcion es este , fecha, hora. La descripcion es este , fecha, hora. La descripcion es este , fecha, hora';
     this.imagen = 'https://cdn.pixabay.com/photo/2016/10/26/22/02/dog-1772759_1280.jpg';
