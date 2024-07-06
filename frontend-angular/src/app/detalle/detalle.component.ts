@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core'; // Importamos lo necesario desde Angular
-import { PeliculasService } from '../peliculas.service'; // Importamos el servicio de películas
+import { Component, Input, OnInit } from '@angular/core';
+import { PeliculasService } from '../peliculas.service'; 
 import { DatePipe } from '@angular/common'; // Importamos DatePipe para formatear fechas
-import { FuncionesService } from '../funciones.service'; // Importamos el servicio de funciones
+import { FuncionesService } from '../funciones.service'; 
 import { RouterLink } from '@angular/router';
 
 // Definimos una interfaz para las funciones de películas
@@ -12,20 +12,20 @@ interface Funcion {
   sala: number; // Identificador de la sala donde se proyecta la película
 }
 
-// Definimos el componente DetalleComponent
 @Component({
-  selector: 'app-detalle', // Nombre del selector para usar este componente en HTML
-  standalone: true, // Indica que el componente es autónomo
-  imports: [DatePipe, RouterLink], // Importa DatePipe para usar en el template
-  templateUrl: './detalle.component.html', // Ruta al archivo de template HTML
-  styleUrl: './detalle.component.css' // Ruta al archivo de estilos CSS
+  selector: 'app-detalle', 
+  standalone: true, 
+  imports: [DatePipe, RouterLink],
+  templateUrl: './detalle.component.html',
+  styleUrl: './detalle.component.css' 
 })
-export class DetalleComponent implements OnInit { // Clase del componente que implementa OnInit
-  @Input("pelicula_id") pelicula_id: number = 0; // Decorador Input para recibir el ID de la película desde el componente padre
-  pelicula: any = {}; // Objeto para almacenar los detalles de la película
+export class DetalleComponent implements OnInit {
+  // Decorador Input para recibir el ID de la película desde el componente padre
+  @Input("pelicula_id") pelicula_id: number = 0; 
+  pelicula: any = {};
   funciones: { fecha: string; funciones: Funcion[]; }[] = []; // Array para almacenar funciones agrupadas por fecha
 
-  // Constructor que inyecta los servicios PeliculasService y FuncionesService
+
   constructor(private PeliculaService: PeliculasService, private FuncionesService: FuncionesService) { }
 
   // Método para agrupar funciones por fecha
@@ -36,7 +36,7 @@ export class DetalleComponent implements OnInit { // Clase del componente que im
     funciones.forEach((funcion: Funcion) => {
       const fecha = new Date(funcion.horario).toDateString(); // Convertimos el horario a una fecha legible
       if (!funcionesAgrupadas[fecha]) {
-        funcionesAgrupadas[fecha] = []; // Inicializamos el array si no existe para la fecha
+        funcionesAgrupadas[fecha] = [];
       }
       funcionesAgrupadas[fecha].push(funcion); // Añadimos la función al array de la fecha correspondiente
     });
@@ -49,7 +49,8 @@ export class DetalleComponent implements OnInit { // Clase del componente que im
       fecha,
       funciones: funcionesAgrupadas[fecha].map(funcion => ({
         id: funcion.id,
-        horario: new Date(funcion.horario).getHours() + ':' + new Date(funcion.horario).getMinutes(), // Formateamos el horario
+        // Formateamos el horario
+        horario: new Date(funcion.horario).getHours() + ':' + new Date(funcion.horario).getMinutes(),
         pelicula: funcion.pelicula,
         sala: funcion.sala,
       })),
