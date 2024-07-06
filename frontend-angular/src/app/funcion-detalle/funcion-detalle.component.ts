@@ -157,8 +157,22 @@ export class FuncionDetalleComponent implements OnInit{
     return this.primerPasoValido() && (this.contidadBoletosAdultos + this.contidadBoletosNinos) === this.numeroAsientosSeleccionados;
   }
 
+  // (3 paso)
+  onSubmit(): void {
+    if (this.formulario.valid) {
+      console.log("Datos del formulario");
+      console.log(this.formulario.value.nombre);
+      console.log(this.formulario.value.correo);
+      console.log("Pelicula: " + this.titulo);
+      console.log("Sala: " + this.sala);
+      console.log("fecha: " + this.fecha);
+      console.log("Hora: " + this.hora);
+      console.log("Tipo de boletos: Adultos: " + this.contidadBoletosAdultos + " Niños: " + this.contidadBoletosNinos);
+      console.log("Asientos: " + this.codigosAsientosSeleccionados);
+      console.log("Total a pagar: " + this.pagoTotal);
 
-
-
+      alert("Boletos Comprados Exitosamente!");
+    }
+  }
 
 }
