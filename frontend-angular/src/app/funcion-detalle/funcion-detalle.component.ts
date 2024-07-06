@@ -134,6 +134,10 @@ export class FuncionDetalleComponent {
     }
   }
 
+  segundoPasoValido() {
+    return this.primerPasoValido() && (this.contidadBoletosAdultos + this.contidadBoletosNinos) === this.numeroAsientosSeleccionados;
+  }
+
 
 
 }
