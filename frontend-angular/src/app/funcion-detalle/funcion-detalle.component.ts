@@ -30,6 +30,21 @@ export class FuncionDetalleComponent {
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
   }
 
+  // Variables que almacenarán la información de la funcion
+  titulo: string = '';
+  descripcion: string = '';
+  imagen: string = '';
+  sala: string = '06';
+  asientos: any[] = [
+    {fila:'A', totalAsientos: 8},
+    {fila:'B', totalAsientos: 8},
+    {fila:'C', totalAsientos: 8}, 
+    {fila:'D', totalAsientos: 8}
+  ];
+  fecha = "15 de Julio, 2027";
+  hora = "7:00 PM";
+
+
   // Variables y Funciones para la selección de asientos (1 paso del stepper)
 
   listaAsientosSeleccionados: any []= [];
