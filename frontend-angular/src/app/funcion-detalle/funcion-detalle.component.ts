@@ -117,7 +117,14 @@ export class FuncionDetalleComponent {
     }
 
   }
-
+  
+  disminuirCantidadBoletos(tipo: string) {
+    if (tipo === 'adultos' && this.contidadBoletosAdultos > 0) {
+      this.contidadBoletosAdultos--;
+    } else if (tipo === 'ninos' && this.contidadBoletosNinos > 0) {
+      this.contidadBoletosNinos--;
+    }
+  }
 
 
 
