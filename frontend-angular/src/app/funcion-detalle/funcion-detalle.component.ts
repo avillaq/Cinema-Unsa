@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
+import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation, MatStepperModule} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-funcion-detalle',
@@ -21,14 +22,14 @@ import {AsyncPipe} from '@angular/common';
   templateUrl: './funcion-detalle.component.html',
   styleUrl: './funcion-detalle.component.css'
 })
-export class FuncionDetalleComponent {
+export class FuncionDetalleComponent implements OnInit{
 
 
   // Orientación del stepper
   stepperOrientation: Observable<StepperOrientation>;
 
   // Constructor que se encarga de la orientación del stepper: horizontal o vertical
-  constructor(breakpointObserver: BreakpointObserver, ) {
+  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, ) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -54,6 +55,15 @@ export class FuncionDetalleComponent {
     nombre: new FormControl(''),
     correo: new FormControl('')
   });
+
+  ngOnInit() {
+    // (3 paso) Validación del formulario de pago  
+    this.formulario = this.formBuilder.group({
+      nombre: ['', [Validators.required]],
+      correo: ['', [Validators.required, Validators.email]]
+    });
+    
+  }
 
 
   // Variables y Funciones para la selección de asientos (1 paso del stepper)
