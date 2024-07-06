@@ -203,7 +203,7 @@
                     <h1 class="text-2xl text-gray-900 sm:text-3xl">Elige una forma de Pago</h1>
                 </div>
 
-                <form class="max-w-sm mx-auto" [formGroup]="formulario">
+                <form class="max-w-sm mx-auto" [formGroup]="formulario" (ngSubmit)="onSubmit()">
                     <div class="mb-5">
                         <label for="nombre" class="block mb-2 text-sm font-medium text-gray-600">Nombre Completo</label>
                         <input type="input" id="nombre"
