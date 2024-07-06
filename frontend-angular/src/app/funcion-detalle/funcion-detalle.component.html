@@ -42,6 +42,40 @@
 
     <mat-stepper linear #stepper class="example-stepper flex-1 p-2" [orientation]="(stepperOrientation | async)!">
         <mat-step label="Butacas">
+            <div class="parentDiv my-6">
+
+                <ul class="showcase">
+                    <li>
+                        <div class="seat"></div>
+                        <small>Disponible</small>
+                    </li>
+                    <li>
+                        <div class="seat selected"></div>
+                        <small>Seleccionado</small>
+                    </li>
+                    <li>
+                        <div class="seat occupied"></div>
+                        <small>Ocupado</small>
+                    </li>
+                </ul>
+
+                <div class="seat-container">
+                    <div class="screen"></div>
+                    @for (filas of asientos; track $index) {
+                    <div class="row">
+                        <p class="mr-2"> {{filas.fila}}</p>
+                        @for (asiento of getArregloAsientos(filas.totalAsientos); track $index) {
+                        <div class="seat"
+                            (click)="reservarAsiento(filas.fila, asiento)"> {{asiento}}</div>
+                        }
+                    </div>
+                    }
+                </div>
+
+                <p class="text">
+                    Butacas seleccionadas: <span id="count">{{codigosAsientosSeleccionados}}</span>
+                </p>
+            </div>
 
             <div class="mt-2 text-end">
                 <button mat-button matStepperNext>Siguiente</button>
