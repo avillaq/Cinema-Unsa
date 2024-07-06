@@ -108,14 +108,17 @@ export class FuncionDetalleComponent {
   contidadBoletosAdultos: number = 0;
   contidadBoletosNinos: number = 0;
 
+  pagoTotal:number = 0.0;
 
   aumentarCantidadBoletos(tipo: string) {
     const totalBoletos = this.contidadBoletosAdultos + this.contidadBoletosNinos;
     if (totalBoletos < this.numeroAsientosSeleccionados) {
       if (tipo === 'adultos') {
         this.contidadBoletosAdultos++;
+        this.pagoTotal += this.precioBoletoAdulto;
       } else if (tipo === 'ninos'){
         this.contidadBoletosNinos++;
+        this.pagoTotal += this.precioBoletoNino;
       }
     }
 
@@ -124,8 +127,10 @@ export class FuncionDetalleComponent {
   disminuirCantidadBoletos(tipo: string) {
     if (tipo === 'adultos' && this.contidadBoletosAdultos > 0) {
       this.contidadBoletosAdultos--;
+      this.pagoTotal -= this.precioBoletoAdulto;
     } else if (tipo === 'ninos' && this.contidadBoletosNinos > 0) {
       this.contidadBoletosNinos--;
+      this.pagoTotal -= this.precioBoletoNino;
     }
   }
 
