@@ -41,7 +41,7 @@
     </section>
 
     <mat-stepper linear #stepper class="example-stepper flex-1 p-2" [orientation]="(stepperOrientation | async)!">
-        <mat-step label="Butacas">
+        <mat-step label="Butacas" [completed]="primerPasoValido()">
             <div class="parentDiv my-6">
 
                 <ul class="showcase">

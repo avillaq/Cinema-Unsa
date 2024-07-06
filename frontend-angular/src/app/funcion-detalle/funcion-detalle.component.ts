@@ -97,6 +97,10 @@ export class FuncionDetalleComponent {
     this.codigosAsientosSeleccionados = this.codigosAsientosSeleccionados.slice(0, -2);
   }
 
+  // (1 paso)
+  primerPasoValido() {
+    return this.numeroAsientosSeleccionados > 0;
+  }
 
 
 
