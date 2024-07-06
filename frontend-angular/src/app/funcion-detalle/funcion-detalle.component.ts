@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormGroup, FormControl} from '@angular/forms';
+import {ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation, MatStepperModule} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
@@ -14,6 +14,7 @@ import {AsyncPipe} from '@angular/common';
   imports: [
     CommonModule,
     MatStepperModule,
+    ReactiveFormsModule,
     MatButtonModule,
     AsyncPipe
   ],
