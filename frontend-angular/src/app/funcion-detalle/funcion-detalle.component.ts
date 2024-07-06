@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormBuilder, Validators, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
@@ -7,7 +7,6 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
-import { OnInit } from '@angular/core';
 
 import { FuncionesService } from '../funciones.service';
 import { PeliculasService } from '../peliculas.service';
@@ -52,7 +51,8 @@ export class FuncionDetalleComponent implements OnInit{
   fecha = "";
   hora = "";
 
-  
+  @Input("pelicula_id") pelicula_id: number = 0;
+  @Input("funcion_id") funcion_id: number = 0;
 
 
   // (3 paso) Formulario para el pago de los boletos 
@@ -62,20 +62,18 @@ export class FuncionDetalleComponent implements OnInit{
   });
 
   ngOnInit() {
-    this.peliculasService.getPelicula(3).subscribe((data: any) => {
-      console.log(data);
+    this.peliculasService.getPelicula(this.pelicula_id).subscribe((data: any) => {
+      this.titulo = data.titulo;
+      this.descripcion = data.descripcion;
+      this.imagen = data.poster_url;
+
     });
 
-    this.funcionesService.getFuncion(3,4).subscribe((data: any) => {
-      console.log(data);
-      
+    this.funcionesService.getFuncion(this.pelicula_id,this.funcion_id).subscribe((data: any) => {
+      this.sala = data.sala;
+      this.fecha = data.horario;
+      this.hora = data.horario;
     });
-
-
-    this.titulo = 'Este es un titulo';
-    this.descripcion = 'La descripcion es este , fecha, hora .  La descripcion es este , fecha, hora. La descripcion es este , fecha, hora. La descripcion es este , fecha, hora';
-    this.imagen = 'https://cdn.pixabay.com/photo/2016/10/26/22/02/dog-1772759_1280.jpg';
-    this.sala = '06';
     this.fecha = "15 de Julio, 2027";
     this.hora = "7:00 PM";
 

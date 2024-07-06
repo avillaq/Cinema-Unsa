@@ -7,8 +7,6 @@
         <div class="w-full lg:py-3  lg:mt-0">
             <h1 class="text-gray-900 text-3xl title-font font-medium my-1 text-center">{{titulo}}</h1>
 
-            <p class="">{{descripcion}}</p>
-
             <div class="flex mt-2 gap-1">
                 <span class="title-font font-medium text-base text-gray-900">Fecha: </span>
                 <p class="title-font text-base text-gray-600">{{fecha}}</p>
@@ -23,7 +21,7 @@
             </div>
             <div class="flex gap-1">
                 <span class="title-font font-medium text-base text-gray-900">Cantidad Boletos: </span>
-                <p class="title-font text-base text-gray-600">3</p>
+                <p class="title-font text-base text-gray-600">{{contidadBoletosNinos+contidadBoletosAdultos}}</p>
             </div>
             <div class="flex gap-1">
                 <span class="title-font font-medium text-base text-gray-900">Bustacas Seleccionadas: </span>
