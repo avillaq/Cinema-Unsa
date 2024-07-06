@@ -65,7 +65,7 @@
                     <div class="row">
                         <p class="mr-2"> {{filas.fila}}</p>
                         @for (asiento of getArregloAsientos(filas.totalAsientos); track $index) {
-                        <div class="seat"
+                        <div class="seat" [ngClass]="revisarAsientoReservado(filas.fila, asiento) ? 'selected': ''"
                             (click)="reservarAsiento(filas.fila, asiento)"> {{asiento}}</div>
                         }
                     </div>

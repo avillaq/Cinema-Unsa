@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation, MatStepperModule} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
@@ -10,6 +11,7 @@ import {AsyncPipe} from '@angular/common';
   selector: 'app-funcion-detalle',
   standalone: true,
   imports: [
+    CommonModule,
     MatStepperModule,
     MatButtonModule,
     AsyncPipe
@@ -94,6 +96,7 @@ export class FuncionDetalleComponent {
     });
     this.codigosAsientosSeleccionados = this.codigosAsientosSeleccionados.slice(0, -2);
   }
+
 
 
 
