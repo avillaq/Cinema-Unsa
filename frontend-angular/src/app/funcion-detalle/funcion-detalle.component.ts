@@ -39,15 +39,15 @@ export class FuncionDetalleComponent implements OnInit{
   titulo: string = '';
   descripcion: string = '';
   imagen: string = '';
-  sala: string = '06';
+  sala: string = '';
   asientos: any[] = [
     {fila:'A', totalAsientos: 8},
     {fila:'B', totalAsientos: 8},
     {fila:'C', totalAsientos: 8}, 
     {fila:'D', totalAsientos: 8}
   ];
-  fecha = "15 de Julio, 2027";
-  hora = "7:00 PM";
+  fecha = "";
+  hora = "";
 
 
   // (3 paso) Formulario para el pago de los boletos 
@@ -57,6 +57,13 @@ export class FuncionDetalleComponent implements OnInit{
   });
 
   ngOnInit() {
+    this.titulo = 'Este es un titulo';
+    this.descripcion = 'La descripcion es este , fecha, hora .  La descripcion es este , fecha, hora. La descripcion es este , fecha, hora. La descripcion es este , fecha, hora';
+    this.imagen = 'https://cdn.pixabay.com/photo/2016/10/26/22/02/dog-1772759_1280.jpg';
+    this.sala = '06';
+    this.fecha = "15 de Julio, 2027";
+    this.hora = "7:00 PM";
+
     // (3 paso) Validación del formulario de pago  
     this.formulario = this.formBuilder.group({
       nombre: ['', [Validators.required]],
