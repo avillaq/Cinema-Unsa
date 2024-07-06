@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormGroup, FormControl} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation, MatStepperModule} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
@@ -45,6 +46,13 @@ export class FuncionDetalleComponent {
   ];
   fecha = "15 de Julio, 2027";
   hora = "7:00 PM";
+
+
+  // (3 paso) Formulario para el pago de los boletos 
+  formulario: FormGroup = new FormGroup({
+    nombre: new FormControl(''),
+    correo: new FormControl('')
+  });
 
 
   // Variables y Funciones para la selección de asientos (1 paso del stepper)
@@ -137,6 +145,8 @@ export class FuncionDetalleComponent {
   segundoPasoValido() {
     return this.primerPasoValido() && (this.contidadBoletosAdultos + this.contidadBoletosNinos) === this.numeroAsientosSeleccionados;
   }
+
+
 
 
 
