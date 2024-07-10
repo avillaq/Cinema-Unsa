@@ -12,7 +12,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 registerLocaleData(localeEs, 'es');
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(appRoutes,withComponentInputBinding()), provideHttpClient(),  { provide: LOCALE_ID, useValue: 'es' }, provideAnimationsAsync()]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(appRoutes,withComponentInputBinding()), provideHttpClient(),  { provide: LOCALE_ID, useValue: 'es' }, provideAnimationsAsync(), provideAnimationsAsync()]
 };
 
 

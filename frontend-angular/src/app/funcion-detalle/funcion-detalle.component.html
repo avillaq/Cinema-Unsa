@@ -41,7 +41,6 @@
     <mat-stepper linear #stepper class="example-stepper flex-1 p-2" [orientation]="(stepperOrientation | async)!">
         <mat-step label="Butacas" [completed]="primerPasoValido()">
             <div class="parentDiv my-6">
-
                 <ul class="showcase">
                     <li>
                         <div class="seat"></div>
@@ -56,7 +55,6 @@
                         <small>Ocupado</small>
                     </li>
                 </ul>
-
                 <div class="seat-container">
                     <div class="screen"></div>
                     @for (filas of asientos; track $index) {
@@ -69,7 +67,6 @@
                     </div>
                     }
                 </div>
-
                 <p class="text">
                     Butacas seleccionadas: <span id="count">{{codigosAsientosSeleccionados}}</span>
                 </p>
@@ -194,7 +191,7 @@
         <mat-step label="Pago">
             <div class="mx-auto max-w-screen-xl px-4 my-6 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-lg text-center mb-5">
-                    <h1 class="text-2xl text-gray-900 sm:text-3xl">Elige una forma de Pago</h1>
+                    <h1 class="text-2xl text-gray-900 sm:text-3xl">Formulario de Pago</h1>
                 </div>
 
                 <form class="max-w-sm mx-auto" [formGroup]="formulario" (ngSubmit)="onSubmit()">

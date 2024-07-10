@@ -50,7 +50,8 @@ export class FuncionDetalleComponent implements OnInit{
   ];
   fecha = "";
   hora = "";
-
+  
+  // Variables para la obtención de los parametros de la URL 
   @Input("pelicula_id") pelicula_id: number = 0;
   @Input("funcion_id") funcion_id: number = 0;
 
@@ -90,7 +91,7 @@ export class FuncionDetalleComponent implements OnInit{
   }
 
 
-  // Variables y Funciones para la selección de asientos (1 paso del stepper)
+  // (1 paso del stepper) Variables y Funciones para la selección de asientos
 
   listaAsientosSeleccionados: any []= [];
   numeroAsientosSeleccionados: number = 0;
@@ -140,6 +141,7 @@ export class FuncionDetalleComponent implements OnInit{
     this.codigosAsientosSeleccionados = this.codigosAsientosSeleccionados.slice(0, -2);
   }
 
+  // Validación del primer paso del stepper
   primerPasoValido() {
     return this.numeroAsientosSeleccionados > 0;
   }
@@ -177,6 +179,7 @@ export class FuncionDetalleComponent implements OnInit{
     }
   }
 
+  // Validación del segundo paso del stepper . Verifica que la cantidad de boletos seleccionados sea igual a la cantidad de asientos seleccionados
   segundoPasoValido() {
     return this.primerPasoValido() && (this.contidadBoletosAdultos + this.contidadBoletosNinos) === this.numeroAsientosSeleccionados;
   }

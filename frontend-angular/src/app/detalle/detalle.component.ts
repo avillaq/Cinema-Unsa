@@ -28,6 +28,19 @@ export class DetalleComponent implements OnInit {
 
   constructor(private PeliculaService: PeliculasService, private FuncionesService: FuncionesService) { }
 
+  // Método ngOnInit que se ejecuta al inicializar el componente
+  ngOnInit() {
+    // Llamada al servicio para obtener los detalles de la película
+    this.PeliculaService.getPelicula(this.pelicula_id).subscribe(data => {
+      this.pelicula = data; 
+    });
+
+    // Llamada al servicio para obtener las funciones de la película
+    this.FuncionesService.getFunciones(this.pelicula_id).subscribe((data: Object) => {
+      this.funciones = this.agruparFuncionesPorFecha(data as Funcion[]); // Agrupamos las funciones por fecha
+    });
+  }
+
   // Método para agrupar funciones por fecha
   agruparFuncionesPorFecha(funciones: Funcion[]): { fecha: string; funciones: Funcion[]; }[] {
     const funcionesAgrupadas: { [fecha: string]: Funcion[] } = {}; // Objeto para agrupar funciones
@@ -57,16 +70,5 @@ export class DetalleComponent implements OnInit {
     }));
   }
 
-  // Método ngOnInit que se ejecuta al inicializar el componente
-  ngOnInit() {
-    // Llamada al servicio para obtener los detalles de la película
-    this.PeliculaService.getPelicula(this.pelicula_id).subscribe(data => {
-      this.pelicula = data; 
-    });
-
-    // Llamada al servicio para obtener las funciones de la película
-    this.FuncionesService.getFunciones(this.pelicula_id).subscribe((data: Object) => {
-      this.funciones = this.agruparFuncionesPorFecha(data as Funcion[]); // Agrupamos las funciones por fecha
-    });
-  }
+  
 }
