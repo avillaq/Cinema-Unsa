@@ -130,3 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200"
 ]
+
+
+# Claves de stripe
+STRIPE_SECRET_KEY = "sk_test_51PcEIjRpc8Awm1hPpjc365C5vryPHq7HFd6xSwNQXc1oXx5bdGkjWyzMEWtXuF5cxIZsg2Qrt7tuebEkcTJXuiBr00o5N4bu7Y"
+STRIPE_PUBLIC_KEY = "pk_test_51PcEIjRpc8Awm1hPGYRiuEXxWy9iWO5pJgsBVQeGdSK8SyoxLZUiYJknlO4dv7d0mZzMpkYJ3MYDQTLpSzbTC9L100HLKAVBM8"
