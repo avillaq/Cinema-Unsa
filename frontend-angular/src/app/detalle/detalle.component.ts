@@ -20,7 +20,7 @@ interface Funcion {
   styleUrl: './detalle.component.css' 
 })
 export class DetalleComponent implements OnInit {
-  // Decorador Input para recibir el ID de la película desde el componente padre
+  // Decorador Input para recibir el ID de la película desde la url
   @Input("pelicula_id") pelicula_id: number = 0; 
   pelicula: any = {};
   funciones: { fecha: string; funciones: Funcion[]; }[] = []; // Array para almacenar funciones agrupadas por fecha
