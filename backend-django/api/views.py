@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+import json
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -48,11 +49,14 @@ def create_checkout_session(request):
          }, 'quantity': int(boleto['cantidad']), 
         } for boleto in data ]
     try:
+        # Serializar los valores de metadata a cadenas JSON
+        metadata = {key: json.dumps(value) if isinstance(value, dict) else str(value) for key, value in request.data.items()}
+
         checkout_session = stripe.checkout.Session.create(
             line_items=compras,
             phone_number_collection={"enabled": True},
             mode='payment',
-            success_url='http://localhost:4200/',
+            success_url='http://localhost:4200/confirmacion?session_id={CHECKOUT_SESSION_ID}',
             cancel_url='http://localhost:4200/',
             custom_fields=[
                 {
@@ -62,6 +66,9 @@ def create_checkout_session(request):
                     "numeric": {"minimum_length": 8, "maximum_length": 8, "default_value": 11111111},
                 },
             ],
+            metadata=metadata,
+            
+            
         )
         return Response({'id': checkout_session.id})
     except Exception as e:
