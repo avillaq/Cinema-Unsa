@@ -23,4 +23,8 @@ export class PagosService {
 
   }
 
+  getDatosPago(session_id: string) {
+    return this.http.get("http://127.0.0.1:8000/api/get-session-data/"+session_id);
+  }
+
 }
