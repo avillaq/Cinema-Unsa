@@ -26,7 +26,9 @@ export class ConfirmacionComponent implements OnInit{
   }
 
   descargarRecibo(): void {
-    this.pagosService.generarReciboPDF().subscribe((response: any) => {
+    let datosFiltrados = this.filtrarDatosPago(); 
+
+    this.pagosService.generarReciboPDF(datosFiltrados).subscribe((response: any) => {
       let archivoBlob = new Blob([response], { type: "application/pdf" });
       let url = window.URL.createObjectURL(archivoBlob);
       let link = document.createElement("a");
@@ -34,7 +36,6 @@ export class ConfirmacionComponent implements OnInit{
       link.download = "Recibo_Compra.pdf";
       link.click();
       window.URL.revokeObjectURL(url);
-      console.log(this.filtrarDatosPago());
     });
   }
 

@@ -27,8 +27,8 @@ export class PagosService {
     return this.http.get("http://127.0.0.1:8000/api/get-session-data/"+session_id);
   }
 
-  generarReciboPDF() {
-    return this.http.get("http://127.0.0.1:8000/api/generar-recibo/",{
+  generarReciboPDF(datosCompra: any) {
+    return this.http.post("http://127.0.0.1:8000/api/generar-recibo/", datosCompra,{
       responseType: "blob"
     });
   }
