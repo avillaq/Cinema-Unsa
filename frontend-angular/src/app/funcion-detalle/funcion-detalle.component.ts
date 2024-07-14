@@ -10,6 +10,7 @@ import {AsyncPipe} from '@angular/common';
 
 import { FuncionesService } from '../funciones.service';
 import { PeliculasService } from '../peliculas.service';
+import { PagosService } from '../pagos.service';
 
 @Component({
   selector: 'app-funcion-detalle',
@@ -31,7 +32,7 @@ export class FuncionDetalleComponent implements OnInit{
   stepperOrientation: Observable<StepperOrientation>;
 
   // Constructor que se encarga de la orientación del stepper: horizontal o vertical
-  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private funcionesService: FuncionesService, private peliculasService: PeliculasService) {
+  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private funcionesService: FuncionesService, private peliculasService: PeliculasService, private pagosService:PagosService) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -202,7 +203,13 @@ export class FuncionDetalleComponent implements OnInit{
         total: this.pagoTotal
       }
       console.log(DatosCompra);
-      alert("Boletos Comprados Exitosamente!");
+      let Datos = {
+        name : "Boletos Para adultos y niños",
+        amount: this.pagoTotal,
+      }
+      this.pagosService.procesarPago(Datos).subscribe((data: any) => {
+        
+      });
     } else {
       alert("Por favor, llena todos los campos");
     }
