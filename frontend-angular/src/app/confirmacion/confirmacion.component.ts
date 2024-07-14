@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PagosService } from '../pagos.service';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-confirmacion',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './confirmacion.component.html',
   styleUrl: './confirmacion.component.css'
 })
@@ -17,8 +18,7 @@ export class ConfirmacionComponent implements OnInit{
     this.pagosService.getDatosPago(this.session_id).subscribe(
       (data: any) => {
         if(data.status == "complete"){
-          alert("Pago completado con éxito");
-          console.log(data);
+          console.log(data.customer_details.name);
         }
       }
     );
