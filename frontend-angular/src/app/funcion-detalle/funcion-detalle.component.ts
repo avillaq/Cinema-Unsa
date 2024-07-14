@@ -188,6 +188,19 @@ export class FuncionDetalleComponent implements OnInit{
   // (3 paso)
   onSubmit(): void {
     if (this.formulario.valid) {
+      let DatosBoletos = [
+        {
+          name : "Boleto Adulto",
+          amount: this.precioBoletoAdulto,
+          quantity: this.contidadBoletosAdultos
+        },
+        {
+          name : "Boleto Niño",
+          amount: this.precioBoletoNino,
+          quantity: this.contidadBoletosNinos
+        }
+      ];
+
       let DatosCompra = {
         nombre: this.formulario.value.nombre,
         correo: this.formulario.value.correo,
@@ -195,19 +208,12 @@ export class FuncionDetalleComponent implements OnInit{
         sala: this.sala,
         fecha: this.fecha,
         hora: this.hora,
-        boletos: {
-          adultos: this.contidadBoletosAdultos,
-          ninos: this.contidadBoletosNinos
-        },
+        boletos: DatosBoletos,
         asientos: this.codigosAsientosSeleccionados,
         total: this.pagoTotal
       }
       console.log(DatosCompra);
-      let Datos = {
-        name : "Boletos Para adultos y niños",
-        amount: this.pagoTotal,
-      }
-      this.pagosService.procesarPago(Datos).subscribe((data: any) => {
+      this.pagosService.procesarPago(DatosCompra).subscribe((data: any) => {
         
       });
     } else {
