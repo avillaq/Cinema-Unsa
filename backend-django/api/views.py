@@ -56,7 +56,7 @@ def create_checkout_session(request):
             line_items=compras,
             phone_number_collection={"enabled": True},
             mode='payment',
-            success_url='http://localhost:4200/confirmacion?session_id={CHECKOUT_SESSION_ID}',
+            success_url='http://localhost:4200/pago/confirmacion?session_id={CHECKOUT_SESSION_ID}',
             cancel_url='http://localhost:4200/',
             custom_fields=[
                 {

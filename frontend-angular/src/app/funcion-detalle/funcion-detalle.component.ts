@@ -216,9 +216,7 @@ export class FuncionDetalleComponent implements OnInit{
         total: this.pagoTotal
       }
       console.log(DatosCompra);
-      this.pagosService.procesarPago(DatosCompra).subscribe((data: any) => {
-        
-      });
+      this.pagosService.procesarPago(DatosCompra).subscribe((data: any) => {});
     } else {
       alert("Por favor, llena todos los campos");
     }
