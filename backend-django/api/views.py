@@ -11,6 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
 
+from django.http import HttpResponse
+from .renderes import render_to_pdf 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -82,6 +84,18 @@ def get_session_data(request, session_id):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 
+@api_view(['GET'])
+def generate_pdf(request):
+    context = {
+        'nombre': "JUAN",
+    }
+    pdf = render_to_pdf('invoice.html', context)
+    if pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Recibo_Compra.pdf"
+        response['Content-Disposition'] = f'attachment; filename={filename}'
+        return response
+    return HttpResponse("Not found", status=404)
 
 # Esta vista sirve para crear los boletos cuando se haya paguado
 # Despues de crear los boletos, se debe actualizar la cantidad de asientos disponibles
