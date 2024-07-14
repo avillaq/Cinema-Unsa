@@ -8,18 +8,26 @@
 
 	<title>Recibo</title>
 	<style>
+		body {
+			font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			font-size: 16px;
+		}
+
 		.invoice-wrapper {
 			width: 700px;
 			margin: auto;
 		}
+
 		.color-primary {
 			color: #1779ba;
 		}
+
 		.titulo {
 			font-size: 30px;
 		}
+
 		.subtitulo {
-			font-size: 18px;
+			font-size: 20px;
 		}
 
 		.table {
@@ -61,10 +69,10 @@
 		.table-hover tbody tr:nth-child(even) {
 			background: #fbf9f9;
 		}
-
-		address {
-			font-style: normal;
+		p {
+			margin: 0;
 		}
+
 	</style>
 </head>
 
@@ -138,14 +146,15 @@
 				</table>
 			</div>
 			<br>
-			<div class="row">
-				<table class="table">
-					<tr>
-						<td>
-							<span class="color-primary subtitulo">Informacion Adicional</span>
-						</td>
-					</tr>
-				</table>
+			<div class="text-left">
+				<p class="color-primary subtitulo">Detalles Adicionales</p>
+				<div>
+					<p>Nombre : <b>Juan Perez</b></p>
+					<p>Email : <b> juan@gmail.com</b></p>
+					<p>Telefono : <b> 123456789</b></p>
+					<p>Dni : <b> 12345678</b></p>
+					<p>Codigo Butacas : <b> D1, H2,E3, A4</b></p>
+				</div>
 			</div>
 		</div>
 	</div>
