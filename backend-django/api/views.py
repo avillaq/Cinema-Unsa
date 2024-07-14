@@ -39,19 +39,11 @@ class FuncionDetallePorPelicula(generics.RetrieveUpdateDestroyAPIView):
 @csrf_exempt
 @api_view(['POST'])
 def create_checkout_session(request):
-    data = request.data
+    data = request.data["boletos"]
+    compras = [ { 'price_data': { 'currency': 'pen', 'product_data': { 'name': boleto['nombre'] }, 'unit_amount': int(boleto['precio'] * 100), }, 'quantity': int(boleto['cantidad']), } for boleto in data ]
     try:
         checkout_session = stripe.checkout.Session.create(
-            line_items=[{
-                'price_data': {
-                    'currency': 'usd',
-                    'product_data': {
-                        'name': data['name'],
-                    },
-                    'unit_amount': int(data['amount'] * 100),
-                },
-                'quantity': 1,
-            }],
+            line_items=compras,
             mode='payment',
             success_url='http://localhost:4200/',
             cancel_url='http://localhost:4200/',
