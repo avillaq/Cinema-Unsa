@@ -40,13 +40,28 @@ class FuncionDetallePorPelicula(generics.RetrieveUpdateDestroyAPIView):
 @api_view(['POST'])
 def create_checkout_session(request):
     data = request.data["boletos"]
-    compras = [ { 'price_data': { 'currency': 'pen', 'product_data': { 'name': boleto['nombre'] }, 'unit_amount': int(boleto['precio'] * 100), }, 'quantity': int(boleto['cantidad']), } for boleto in data ]
+    compras = [ 
+        { 'price_data': 
+         { 'currency': 'pen',
+           'product_data': { 'name': boleto['nombre'] }, 
+           'unit_amount': int(boleto['precio'] * 100), 
+         }, 'quantity': int(boleto['cantidad']), 
+        } for boleto in data ]
     try:
         checkout_session = stripe.checkout.Session.create(
             line_items=compras,
+            phone_number_collection={"enabled": True},
             mode='payment',
             success_url='http://localhost:4200/',
             cancel_url='http://localhost:4200/',
+            custom_fields=[
+                {
+                    "key": "DNI",
+                    "label": {"type": "custom", "custom": "Numero de DNI"},
+                    "type": "numeric",
+                    "numeric": {"minimum_length": 8, "maximum_length": 8, "default_value": 11111111},
+                },
+            ],
         )
         return Response({'id': checkout_session.id})
     except Exception as e:
