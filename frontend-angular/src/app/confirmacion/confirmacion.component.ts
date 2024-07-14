@@ -9,6 +9,7 @@ import { PagosService } from '../pagos.service';
 })
 export class ConfirmacionComponent implements OnInit{
   @Input("session_id") session_id: string = "";
+  url_imagen: string = "../assets/img/confirmacion.png";
 
   constructor(private pagosService:PagosService) { }
 
