@@ -1,41 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Recibo de Compra</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { width: 100%; max-width: 800px; margin: 0 auto; }
-        .header, .footer { text-align: center; margin-bottom: 20px; }
-        .details { margin-bottom: 20px; }
-        .details p { margin: 0; }
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<title>Recibo</title>
+	<style>
+		.invoice-wrapper {
+			width: 700px;
+			margin: auto;
+		}
+		.color-primary {
+			color: #1779ba;
+		}
+		.titulo {
+			font-size: 30px;
+		}
+		.subtitulo {
+			font-size: 18px;
+		}
+
+		.table {
+			width: 80%;
+			border-collapse: collapse;
+		}
+
+		th {
+			text-align: left;
+			padding: 10px;
+		}
+
+		td {
+			padding: 10px;
+			vertical-align: top;
+		}
+
+		.row {
+			display: block;
+			text-align: center;
+		}
+
+		.text-right {
+			text-align: right;
+		}
+
+		.text-left {
+			text-align: left;
+		}
+
+		.table-hover thead tr {
+			background: #eee;
+		}
+
+		.table-hover thead tr th {
+			text-align: center;
+		}
+
+		.table-hover tbody tr:nth-child(even) {
+			background: #fbf9f9;
+		}
+
+		address {
+			font-style: normal;
+		}
+	</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Recibo de Compra</h1>
-        </div>
-        <div class="details">
-            <p><strong>Nombre:</strong> Alexander Villafuerte Quispe </p>
-            <p><strong>Correo:</strong> villafuertequispealex@gmail.com </p>
-        </div>
-        <div class="boletos">
-            <h2>Boletos</h2>
-            <ul>
-                <li>Boletos adultos - 5 x 10 soles</li>
-            </ul>
-        </div>
-        <div class="asientos">
-            <h2>Asientos</h2>
-            <ul>
-                <li>D5</li>
-                <li>D1</li>
-                <li>D3</li>
-            </ul>
-        </div>
-        <div class="footer">
-            <p>Gracias por su compra!</p>
-        </div>
-    </div>
+	<div class="row invoice-wrapper">
+		<div>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<td>
+							<span class="titulo color-primary">Recibo CinemaUNSA</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<td class="text-left">
+							Hola, <b>Juan Perez</b> <br>
+							Gracias por comprar en CinemaUNSA.
+						</td>
+						<td class="text-right">
+							<b>Orden: #1001</b>
+							<br>
+							<b>Fecha: 28 abril 2024</b>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="row">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Producto</th>
+							<th>Cantidad</th>
+							<th>Precio</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>Product Name</td>
+							<td>4</td>
+							<td>1000</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>Product Name</td>
+							<td>4</td>
+							<td>1000</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>Product Name</td>
+							<td>4</td>
+							<td>1000</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="text-right">Sub Total:</td>
+							<td><strong>1000</strong></td>
+						</tr>
+						<tr>
+							<td colspan="3" class="text-right">Total Pago:</td>
+							<td><strong>1180</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<td>
+							<span class="color-primary subtitulo">Informacion Adicional</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>
