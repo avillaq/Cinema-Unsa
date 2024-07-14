@@ -74,6 +74,15 @@ def create_checkout_session(request):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 
+@api_view(['GET'])
+def get_session_data(request, session_id):
+    try:
+        session = stripe.checkout.Session.retrieve(session_id)
+        return Response(session)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+
+
 # Esta vista sirve para crear los boletos cuando se haya paguado
 # Despues de crear los boletos, se debe actualizar la cantidad de asientos disponibles
 # class CrearBoletos():
