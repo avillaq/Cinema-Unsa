@@ -188,18 +188,21 @@ export class FuncionDetalleComponent implements OnInit{
   // (3 paso)
   onSubmit(): void {
     if (this.formulario.valid) {
-      let DatosBoletos = [
-        {
-          name : "Boleto Adulto",
-          amount: this.precioBoletoAdulto,
-          quantity: this.contidadBoletosAdultos
-        },
-        {
-          name : "Boleto Niño",
-          amount: this.precioBoletoNino,
-          quantity: this.contidadBoletosNinos
-        }
-      ];
+      let DatosBoletos = []
+      if (this.contidadBoletosAdultos > 0) {
+        DatosBoletos.push({
+          nombre : "Boleto Adulto",
+          precio: this.precioBoletoAdulto,
+          cantidad: this.contidadBoletosAdultos
+        });
+      }
+      if (this.contidadBoletosNinos > 0) {
+        DatosBoletos.push({
+          nombre : "Boleto Niño",
+          precio: this.precioBoletoNino,
+          cantidad: this.contidadBoletosNinos
+        });
+      }
 
       let DatosCompra = {
         nombre: this.formulario.value.nombre,
