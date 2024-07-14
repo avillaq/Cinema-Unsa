@@ -93,7 +93,7 @@
 				<table class="table">
 					<tr>
 						<td class="text-left">
-							Hola, <b>Juan Perez</b> <br>
+							Hola, <b>{{nombre}}</b> <br>
 							Gracias por comprar en CinemaUNSA.
 						</td>
 						<td class="text-right">
@@ -116,31 +116,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>Product Name</td>
-							<td>4</td>
-							<td>1000</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Product Name</td>
-							<td>4</td>
-							<td>1000</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Product Name</td>
-							<td>4</td>
-							<td>1000</td>
-						</tr>
+						{% for item in boletos %}
+							<tr>
+								<td>1</td>
+								<td>{{item.nombre}}</td>
+								<td>{{item.cantidad}}</td>
+								<td>S/ {{item.precio}}</td>
+							</tr>
+						{% endfor %}
+						
 						<tr>
 							<td colspan="3" class="text-right">Sub Total:</td>
-							<td><strong>1000</strong></td>
+							<td>S/ {{monto}}</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="text-right">Total Pago:</td>
-							<td><strong>1180</strong></td>
+							<td><strong>S/ {{monto}}</strong></td>
 						</tr>
 					</tbody>
 				</table>
@@ -149,21 +140,21 @@
 			<div class="text-left">
 				<p class="color-primary subtitulo">Detalles de la Funcion</p>
 				<div>
-					<p>Nombre : Intensamete 2</p>
-					<p>Sala : 05</p>
-					<p>Butacas : D1, H2,E3, A4</p>
-					<p>Fecha : 28 abril 2024</p>
-					<p>Hora : 10:00 am</p>
+					<p>Nombre : {{pelicula}}</p>
+					<p>Sala : {{sala}}</p>
+					<p>Butacas : {{butacas}}</p>
+					<p>Fecha : {{fecha}}</p>
+					<p>Hora : {{hora}}</p>
 				</div>
 			</div>
 			<br>
 			<div class="text-left">
 				<p class="color-primary subtitulo">Detalles Personales</p>
 				<div>
-					<p>Nombre :Juan Perez</p>
-					<p>Email : juan@gmail.com</p>
-					<p>Telefono : 123456789</p>
-					<p>Dni : 12345678</p>
+					<p>Nombre : {{nombre}}</p>
+					<p>Email : {{email}}</p>
+					<p>DNI : {{dni}}</p>
+					<p>Telefono : {{telefono}}</p>
 				</div>
 			</div>
 		</div>
