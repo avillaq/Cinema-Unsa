@@ -191,16 +191,18 @@ export class FuncionDetalleComponent implements OnInit{
       let DatosBoletos = []
       if (this.contidadBoletosAdultos > 0) {
         DatosBoletos.push({
-          nombre : "Boleto Adulto",
+          nombre : "Boleto Adultos",
           precio: this.precioBoletoAdulto,
-          cantidad: this.contidadBoletosAdultos
+          cantidad: this.contidadBoletosAdultos,
+          monto: this.contidadBoletosAdultos * this.precioBoletoAdulto
         });
       }
       if (this.contidadBoletosNinos > 0) {
         DatosBoletos.push({
-          nombre : "Boleto Niño",
+          nombre : "Boleto Niños",
           precio: this.precioBoletoNino,
-          cantidad: this.contidadBoletosNinos
+          cantidad: this.contidadBoletosNinos,
+          monto: this.contidadBoletosNinos * this.precioBoletoNino
         });
       }
 

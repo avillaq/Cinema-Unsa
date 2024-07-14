@@ -112,7 +112,7 @@
 							<th>N.</th>
 							<th>Producto</th>
 							<th>Cantidad</th>
-							<th>Precio</th>
+							<th>Monto</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -121,17 +121,17 @@
 								<td>1</td>
 								<td>{{item.nombre}}</td>
 								<td>{{item.cantidad}}</td>
-								<td>S/ {{item.precio}}</td>
+								<td>S/ {{item.monto}}</td>
 							</tr>
 						{% endfor %}
 						
 						<tr>
 							<td colspan="3" class="text-right">Sub Total:</td>
-							<td>S/ {{monto}}</td>
+							<td>S/ {{total_monto}}</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="text-right">Total Pago:</td>
-							<td><strong>S/ {{monto}}</strong></td>
+							<td><strong>S/ {{total_monto}}</strong></td>
 						</tr>
 					</tbody>
 				</table>

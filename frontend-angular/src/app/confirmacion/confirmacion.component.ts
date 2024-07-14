@@ -53,7 +53,7 @@ export class ConfirmacionComponent implements OnInit{
       hora : this.datos_pago.metadata.hora,
       boletos: JSON.parse(this.datos_pago.metadata.boletos.replace(/'/g, '"')),
 
-      monto: this.datos_pago.metadata.total,
+      total_monto: this.datos_pago.metadata.total,
     };
     return datos;
   }
