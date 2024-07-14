@@ -84,11 +84,10 @@ def get_session_data(request, session_id):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def generate_pdf(request):
-    context = {
-        'nombre': "JUAN",
-    }
+    context = request.data
+    print(context)
     pdf = render_to_pdf('invoice.html', context)
     if pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
