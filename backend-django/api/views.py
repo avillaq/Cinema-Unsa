@@ -97,18 +97,7 @@ def generate_pdf(request):
         return response
     return HttpResponse("Not found", status=404)
 
-# Esta vista sirve para crear los boletos cuando se haya paguado
-# Despues de crear los boletos, se debe actualizar la cantidad de asientos disponibles
-# class CrearBoletos():
-
-
-# Esta vista sirve para listar cuando se haya paguado los boletos
-class BoletoListaPorFuncion(generics.ListCreateAPIView):
+# Crear y Listar los boletos cuando se haya paguado
+class BoletoLista(generics.ListCreateAPIView):
+    queryset = Boleto.objects.all()
     serializer_class = BoletoSerializer
-
-    def get_queryset(self):
-        funcion_id = self.kwargs['funcion_id']
-        # Despues se va a cambiar este metodo de autenticacion
-        email_usuario = self.request.data.get('email_usuario')
-        usuario = User.objects.get(email=email_usuario) 
-        return Boleto.objects.filter(funcion_id=funcion_id, usuario=usuario)
