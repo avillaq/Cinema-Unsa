@@ -118,7 +118,7 @@
 					<tbody>
 						{% for item in boletos %}
 							<tr>
-								<td></td>
+								<td>{{ forloop.counter }}</td>
 								<td>{{item.nombre}}</td>
 								<td>{{item.cantidad}}</td>
 								<td>S/ {{item.monto}}</td>
