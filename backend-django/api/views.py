@@ -13,6 +13,7 @@ import json
 
 from django.http import HttpResponse
 from .renderes import render_to_pdf 
+from datetime import date
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -87,7 +88,7 @@ def get_session_data(request, session_id):
 @api_view(['POST'])
 def generate_pdf(request):
     context = request.data
-    print(context)
+    context["fecha_actual"] = date.today().strftime("%d/%m/%y")
     pdf = render_to_pdf('invoice.html', context)
     if pdf:
         response = HttpResponse(pdf, content_type='application/pdf')

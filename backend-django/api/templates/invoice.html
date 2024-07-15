@@ -99,7 +99,7 @@
 						<td class="text-right">
 							<b>Orden: #1001</b>
 							<br>
-							<b>Fecha: 28 abril 2024</b>
+							<b>Fecha: {{ fecha_actual }}</b>
 						</td>
 					</tr>
 				</table>
@@ -118,7 +118,7 @@
 					<tbody>
 						{% for item in boletos %}
 							<tr>
-								<td>1</td>
+								<td></td>
 								<td>{{item.nombre}}</td>
 								<td>{{item.cantidad}}</td>
 								<td>S/ {{item.monto}}</td>
