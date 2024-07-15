@@ -25,8 +25,11 @@ class Funcion(models.Model):
 class Boleto(models.Model):
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    asiento = models.CharField(max_length=10)
+    tipo = models.CharField(max_length=50, choices=[("adulto", "Adulto"), ("niño", "Niño")])
+    cantidad = models.PositiveIntegerField()
+    monto_total = models.DecimalField(max_digits=6, decimal_places=2)
     fecha_compra = models.DateTimeField(auto_now_add=True)
+    codigo_compra = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return f"{self.funcion.pelicula.titulo} - {self.asiento} - {self.usuario.username}"
+        return f"{self.funcion.pelicula.titulo} - {self.usuario.username}"
