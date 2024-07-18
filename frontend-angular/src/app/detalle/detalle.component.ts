@@ -7,9 +7,9 @@ import { RouterLink } from '@angular/router';
 // Definimos una interfaz para las funciones de películas
 interface Funcion {
   id: number; // Identificador único de la función
-  horario: string; // Horario de la función en formato de string
-  pelicula: number; // Identificador de la película asociada
-  sala: number; // Identificador de la sala donde se proyecta la película
+  horario: string; 
+  pelicula: number; 
+  sala: number; 
 }
 
 @Component({
