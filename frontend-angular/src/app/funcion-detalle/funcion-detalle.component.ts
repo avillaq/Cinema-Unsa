@@ -191,7 +191,7 @@ export class FuncionDetalleComponent implements OnInit{
       let DatosBoletos = []
       if (this.contidadBoletosAdultos > 0) {
         DatosBoletos.push({
-          nombre : "Boleto Adultos",
+          tipo : "Adulto",
           precio: this.precioBoletoAdulto,
           cantidad: this.contidadBoletosAdultos,
           monto: this.contidadBoletosAdultos * this.precioBoletoAdulto
@@ -199,7 +199,7 @@ export class FuncionDetalleComponent implements OnInit{
       }
       if (this.contidadBoletosNinos > 0) {
         DatosBoletos.push({
-          nombre : "Boleto Niños",
+          tipo : "Niño",
           precio: this.precioBoletoNino,
           cantidad: this.contidadBoletosNinos,
           monto: this.contidadBoletosNinos * this.precioBoletoNino
@@ -217,7 +217,6 @@ export class FuncionDetalleComponent implements OnInit{
         asientos: this.codigosAsientosSeleccionados,
         total: this.pagoTotal
       }
-      console.log(DatosCompra);
       this.pagosService.procesarPago(DatosCompra).subscribe((data: any) => {});
     } else {
       alert("Por favor, llena todos los campos");

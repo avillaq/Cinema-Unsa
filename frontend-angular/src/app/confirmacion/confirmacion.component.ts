@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PagosService } from '../pagos.service';
 import { RouterLink } from '@angular/router';
-import { S } from '@angular/cdk/keycodes';
+
 @Component({
   selector: 'app-confirmacion',
   standalone: true,
