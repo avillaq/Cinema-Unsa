@@ -47,7 +47,7 @@ def create_checkout_session(request):
     compras = [ 
         { 'price_data': 
          { 'currency': 'pen',
-           'product_data': { 'name': boleto['tipo'] }, 
+           'product_data': { 'name': f"Boleto {boleto['tipo']}" }, 
            'unit_amount': int(boleto['precio'] * 100), 
          }, 'quantity': int(boleto['cantidad']), 
         } for boleto in data ]
