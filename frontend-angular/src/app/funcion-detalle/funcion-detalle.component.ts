@@ -210,6 +210,7 @@ export class FuncionDetalleComponent implements OnInit{
         nombre: this.formulario.value.nombre,
         correo: this.formulario.value.correo,
         pelicula: this.titulo,
+        funcion: this.funcion_id,
         sala: this.sala,
         fecha: this.fecha,
         hora: this.hora,

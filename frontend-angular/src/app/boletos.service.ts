@@ -8,7 +8,7 @@ export class BoletosService {
 
   constructor(private http:HttpClient) { }
 
-  setBoletos(datos:any){
+  registrarBoletos(datos:any){
     return this.http.post("http://127.0.0.1:8000/api/compra/boletos/", datos)
     
   }

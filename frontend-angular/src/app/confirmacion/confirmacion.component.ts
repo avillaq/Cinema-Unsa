@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PagosService } from '../pagos.service';
+import { BoletosService } from '../boletos.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -12,23 +13,22 @@ import { RouterLink } from '@angular/router';
 export class ConfirmacionComponent implements OnInit{
   @Input("session_id") session_id: string = "";
   url_imagen: string = "../assets/img/confirmacion.png";
-  datos_pago: any = {};
-  constructor(private pagosService:PagosService) { }
+  datosFiltrados: any = {};
+  constructor(private pagosService:PagosService, private boletosService:BoletosService) { }
 
   ngOnInit() {
     this.pagosService.getDatosPago(this.session_id).subscribe(
       (data: any) => {
         if(data.status == "complete"){
-          this.datos_pago = data;
+          this.filtrarDatosPago(data);
+          this.registrarBoletos();
         }
       }
     );
   }
 
   descargarRecibo(): void {
-    let datosFiltrados = this.filtrarDatosPago(); 
-
-    this.pagosService.generarReciboPDF(datosFiltrados).subscribe((response: any) => {
+    this.pagosService.generarReciboPDF(this.datosFiltrados).subscribe((response: any) => {
       let archivoBlob = new Blob([response], { type: "application/pdf" });
       let url = window.URL.createObjectURL(archivoBlob);
       let link = document.createElement("a");
@@ -38,23 +38,32 @@ export class ConfirmacionComponent implements OnInit{
       window.URL.revokeObjectURL(url);
     });
   }
+  registrarBoletos(): void {
+    this.boletosService.registrarBoletos(this.datosFiltrados).subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
+  }
 
-  filtrarDatosPago(): any {
+
+  filtrarDatosPago(data:any): any {
     let datos = {
-      nombre : this.datos_pago.customer_details.name,
-      email : this.datos_pago.customer_details.email,
-      dni : this.datos_pago.custom_fields[0].numeric.value,
-      telefono : this.datos_pago.customer_details.phone,
+      nombre : data.customer_details.name,
+      email : data.customer_details.email,
+      dni : data.custom_fields[0].numeric.value,
+      telefono : data.customer_details.phone,
 
-      pelicula : this.datos_pago.metadata.pelicula,
-      sala : this.datos_pago.metadata.sala,
-      butacas : this.datos_pago.metadata.asientos,
-      fecha: this.datos_pago.metadata.fecha,
-      hora : this.datos_pago.metadata.hora,
-      boletos: JSON.parse(this.datos_pago.metadata.boletos.replace(/'/g, '"')),
+      pelicula : data.metadata.pelicula,
+      sala : data.metadata.sala,
+      butacas : data.metadata.asientos,
+      fecha: data.metadata.fecha,
+      hora : data.metadata.hora,
+      boletos: JSON.parse(data.metadata.boletos.replace(/'/g, '"')),
+      funcion: data.metadata.funcion,
 
-      total_monto: this.datos_pago.metadata.total,
+      total_monto: data.metadata.total,
     };
-    return datos;
+    this.datosFiltrados = datos;
   }
 }
