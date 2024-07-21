@@ -14,4 +14,7 @@ export class PeliculasService {
   getPelicula(id: number) {
     return this.http.get("http://127.0.0.1:8000/api/peliculas/" + id + "/") 
   }
+  getRankingPeliculas() {
+    return this.http.get("http://127.0.0.1:8000/api/peliculas/ranking") 
+  }
 }
