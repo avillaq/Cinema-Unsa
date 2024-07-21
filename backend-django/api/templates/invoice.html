@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<title>Recibo</title>
+	<style>
+		body {
+			font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			font-size: 16px;
+		}
+
+		.invoice-wrapper {
+			width: 700px;
+			margin: auto;
+		}
+
+		.color-primary {
+			color: #1779ba;
+		}
+
+		.titulo {
+			font-size: 30px;
+		}
+
+		.subtitulo {
+			font-size: 20px;
+		}
+
+		.table {
+			width: 80%;
+			border-collapse: collapse;
+		}
+
+		th {
+			text-align: left;
+			padding: 10px;
+		}
+
+		td {
+			padding: 10px;
+			vertical-align: top;
+		}
+
+		.row {
+			display: block;
+			text-align: center;
+		}
+
+		.text-right {
+			text-align: right;
+		}
+
+		.text-left {
+			text-align: left;
+		}
+
+		.table-hover thead tr {
+			background: #eee;
+		}
+
+		.table-hover thead tr th {
+			text-align: center;
+		}
+
+		.table-hover tbody tr:nth-child(even) {
+			background: #fbf9f9;
+		}
+		p {
+			margin: 0;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="row invoice-wrapper">
+		<div>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<td>
+							<span class="titulo color-primary">Recibo CinemaUNSA</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br><br>
+			<div class="row">
+				<table class="table">
+					<tr>
+						<td class="text-left">
+							Hola, <b>{{nombre}}</b> <br>
+							Gracias por comprar en CinemaUNSA.
+						</td>
+						<td class="text-right">
+							<b>Orden: #1001</b>
+							<br>
+							<b>Fecha: {{ fecha_actual }}</b>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="row">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Producto</th>
+							<th>Cantidad</th>
+							<th>Monto</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in boletos %}
+							<tr>
+								<td>{{ forloop.counter }}</td>
+								<td>Boleto {{item.tipo}}</td>
+								<td>{{item.cantidad}}</td>
+								<td>S/ {{item.monto}}</td>
+							</tr>
+						{% endfor %}
+						
+						<tr>
+							<td colspan="3" class="text-right">Sub Total:</td>
+							<td>S/ {{total_monto}}</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="text-right">Total Pago:</td>
+							<td><strong>S/ {{total_monto}}</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<div class="text-left">
+				<p class="color-primary subtitulo">Detalles de la Funcion</p>
+				<div>
+					<p>Nombre : {{pelicula}}</p>
+					<p>Sala : {{sala}}</p>
+					<p>Butacas : {{butacas}}</p>
+					<p>Fecha : {{fecha}}</p>
+					<p>Hora : {{hora}}</p>
+				</div>
+			</div>
+			<br>
+			<div class="text-left">
+				<p class="color-primary subtitulo">Detalles Personales</p>
+				<div>
+					<p>Nombre : {{nombre}}</p>
+					<p>Email : {{email}}</p>
+					<p>DNI : {{dni}}</p>
+					<p>Telefono : {{telefono}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
