@@ -29,7 +29,7 @@ class Boleto(models.Model):
     cantidad = models.PositiveIntegerField(default=0)
     monto_total = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     fecha_compra = models.DateTimeField(auto_now_add=True)
-    codigo_compra = models.CharField(max_length=100, unique=True)
+    codigo_compra = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.funcion.pelicula.titulo} - {self.usuario.username}"
