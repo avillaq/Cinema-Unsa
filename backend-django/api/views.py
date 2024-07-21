@@ -14,6 +14,7 @@ import json
 from django.http import HttpResponse
 from .renderes import render_to_pdf 
 from datetime import date
+import uuid
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -97,7 +98,32 @@ def generate_pdf(request):
         return response
     return HttpResponse("Not found", status=404)
 
-# Crear y Listar los boletos cuando se haya paguado
-class BoletoLista(generics.ListCreateAPIView):
+# Crear y Listar los boletos cuando se haya pagado
+class BoletoListaRegistrar(generics.ListCreateAPIView):
     queryset = Boleto.objects.all()
     serializer_class = BoletoSerializer
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        respuesta = []
+        # Creamos al usuario si no existe
+        user, created = User.objects.get_or_create(
+            username=data["nombre"],
+            email=data["email"]
+        )
+        funcion = Funcion.objects.get(pk=data["funcion"])
+        # Generamos un código de compra único para poder diferenciar la compra
+        codigo_compra = str(uuid.uuid4())
+
+        boletos = data["boletos"]
+        for boleto in boletos:
+            tipo = boleto["tipo"]
+            cantidad = boleto["cantidad"]
+            monto_total = boleto["monto"]
+
+            boleto = Boleto.objects.create(funcion=funcion, usuario=user, tipo=tipo, cantidad=cantidad, monto_total=monto_total, codigo_compra=codigo_compra)
+            respuesta.append(boleto)
+
+        # Serializamos los objetos de la lista "respuesta"
+        serializer = BoletoSerializer(respuesta, many=True)
+        return Response(serializer.data, status=201)
