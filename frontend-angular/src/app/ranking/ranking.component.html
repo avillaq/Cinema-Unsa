@@ -1,4 +1,4 @@
-<div class="py-10 w-2/3 m-auto">
+<div class="py-10 w-1/2 m-auto">
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -22,8 +22,13 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 text-center whitespace-nowrap">
                             {{ $index + 1 }}
                         </th>
-                        <td class="px-6 py-4 text-center">
-                            {{ item.titulo }}
+                        <td class="px-6 py-4 flex items-center">
+                            <div class="basis-1/2">
+                                <div class="flex justify-center">  
+                                    <img class="w-14 h-14 rounded-full" src={{item.poster_url}} alt="">
+                                </div>
+                            </div>
+                            <p class="basis-1/2">{{ item.titulo }}</p>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <a [routerLink]="['/peliculas', item.id]" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalle</a>
