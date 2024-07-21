@@ -127,3 +127,7 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
         # Serializamos los objetos de la lista "respuesta"
         serializer = BoletoSerializer(respuesta, many=True)
         return Response(serializer.data, status=201)
+    
+class PeliculaListaRanking(generics.ListAPIView):
+    queryset = Pelicula.objects.order_by('-promedio_votos')[:5]
+    serializer_class = PeliculaSerializer
