@@ -134,7 +134,7 @@ class PeliculaListaRanking(generics.ListAPIView):
 
     def get_queryset(self):
         peliculas = Pelicula.objects.all()
-        m = 1  # Impacto que tiene el número de votos en el ranking
+        m = 100  # Impacto que tiene el número de votos en el ranking
         C = peliculas.aggregate(C=Avg("promedio_votos"))["C"]  # Calificacion promedio de todas las películas
 
         ranking = []
