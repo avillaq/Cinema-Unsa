@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'api/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200"
 ]
+
+
+# Claves de stripe
+STRIPE_SECRET_KEY = "sk_test_51PcEIjRpc8Awm1hPpjc365C5vryPHq7HFd6xSwNQXc1oXx5bdGkjWyzMEWtXuF5cxIZsg2Qrt7tuebEkcTJXuiBr00o5N4bu7Y"
+STRIPE_PUBLIC_KEY = "pk_test_51PcEIjRpc8Awm1hPGYRiuEXxWy9iWO5pJgsBVQeGdSK8SyoxLZUiYJknlO4dv7d0mZzMpkYJ3MYDQTLpSzbTC9L100HLKAVBM8"
