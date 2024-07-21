@@ -10,6 +10,7 @@ import {AsyncPipe} from '@angular/common';
 
 import { FuncionesService } from '../funciones.service';
 import { PeliculasService } from '../peliculas.service';
+import { PagosService } from '../pagos.service';
 
 @Component({
   selector: 'app-funcion-detalle',
@@ -31,7 +32,7 @@ export class FuncionDetalleComponent implements OnInit{
   stepperOrientation: Observable<StepperOrientation>;
 
   // Constructor que se encarga de la orientación del stepper: horizontal o vertical
-  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private funcionesService: FuncionesService, private peliculasService: PeliculasService) {
+  constructor(private formBuilder: FormBuilder, breakpointObserver: BreakpointObserver, private funcionesService: FuncionesService, private peliculasService: PeliculasService, private pagosService:PagosService) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -187,22 +188,37 @@ export class FuncionDetalleComponent implements OnInit{
   // (3 paso)
   onSubmit(): void {
     if (this.formulario.valid) {
+      let DatosBoletos = []
+      if (this.contidadBoletosAdultos > 0) {
+        DatosBoletos.push({
+          tipo : "Adulto",
+          precio: this.precioBoletoAdulto,
+          cantidad: this.contidadBoletosAdultos,
+          monto: this.contidadBoletosAdultos * this.precioBoletoAdulto
+        });
+      }
+      if (this.contidadBoletosNinos > 0) {
+        DatosBoletos.push({
+          tipo : "Niño",
+          precio: this.precioBoletoNino,
+          cantidad: this.contidadBoletosNinos,
+          monto: this.contidadBoletosNinos * this.precioBoletoNino
+        });
+      }
+
       let DatosCompra = {
         nombre: this.formulario.value.nombre,
         correo: this.formulario.value.correo,
         pelicula: this.titulo,
+        funcion: this.funcion_id,
         sala: this.sala,
         fecha: this.fecha,
         hora: this.hora,
-        boletos: {
-          adultos: this.contidadBoletosAdultos,
-          ninos: this.contidadBoletosNinos
-        },
+        boletos: DatosBoletos,
         asientos: this.codigosAsientosSeleccionados,
         total: this.pagoTotal
       }
-      console.log(DatosCompra);
-      alert("Boletos Comprados Exitosamente!");
+      this.pagosService.procesarPago(DatosCompra).subscribe((data: any) => {});
     } else {
       alert("Por favor, llena todos los campos");
     }
