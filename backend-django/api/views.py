@@ -14,6 +14,7 @@ import json
 from django.http import HttpResponse
 from .renderes import render_to_pdf 
 from datetime import date
+from django.db.models import Avg
 import uuid
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -129,5 +130,25 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
         return Response(serializer.data, status=201)
     
 class PeliculaListaRanking(generics.ListAPIView):
-    queryset = Pelicula.objects.order_by('-promedio_votos')[:5]
     serializer_class = PeliculaSerializer
+
+    def get_queryset(self):
+        peliculas = Pelicula.objects.all()
+        m = 1  # Impacto que tiene el número de votos en el ranking
+        C = peliculas.aggregate(C=Avg("promedio_votos"))["C"]  # Calificacion promedio de todas las películas
+
+        ranking = []
+
+        for pelicula in peliculas:
+            if pelicula.total_votos < m:
+                continue
+            v = pelicula.total_votos
+            R = pelicula.promedio_votos
+            WR = (v / (v + m)) * R + (m / (v + m)) * C
+            ranking.append((pelicula, WR))
+
+        # Ordenamos el ranking de mayor a menor
+        ranking.sort(key=lambda elemento: elemento[1], reverse=True)
+        ranked_peliculas = [pelicula[0] for pelicula in ranking]
+
+        return ranked_peliculas
