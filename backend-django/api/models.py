@@ -20,6 +20,7 @@ class Funcion(models.Model):
     pelicula = models.ForeignKey(Pelicula, on_delete=models.CASCADE)
     horario = models.DateTimeField()
     sala = models.CharField(max_length=50)
+    asientos_ocupados = models.JSONField(default=list)
 
     def __str__(self):
         return f"{self.pelicula.titulo} - {self.horario}"
@@ -34,4 +35,4 @@ class Boleto(models.Model):
     codigo_compra = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.funcion.pelicula.titulo} - {self.usuario.username}"
+        return f"{self.funcion.pelicula.titulo} - {self.usuario.username} - {self.fecha_compra}"
