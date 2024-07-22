@@ -125,6 +125,12 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
             boleto = Boleto.objects.create(funcion=funcion, usuario=user, tipo=tipo, cantidad=cantidad, monto_total=monto_total, codigo_compra=codigo_compra)
             respuesta.append(boleto)
 
+        # Actualizamos los asientos ocupados
+        asientos_ocupar = data["asientos"].split(",")
+
+        funcion.asientos_ocupados.extend(asientos_ocupar)
+        funcion.save()
+
         # Serializamos los objetos de la lista "respuesta"
         serializer = BoletoSerializer(respuesta, many=True)
         return Response(serializer.data, status=201)

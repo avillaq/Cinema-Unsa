@@ -56,7 +56,7 @@ export class ConfirmacionComponent implements OnInit{
 
       pelicula : data.metadata.pelicula,
       sala : data.metadata.sala,
-      butacas : data.metadata.asientos,
+      asientos : data.metadata.asientos,
       fecha: data.metadata.fecha,
       hora : data.metadata.hora,
       boletos: JSON.parse(data.metadata.boletos.replace(/'/g, '"')),
