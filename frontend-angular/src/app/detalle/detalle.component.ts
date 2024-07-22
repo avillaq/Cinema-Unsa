@@ -25,9 +25,7 @@ export class DetalleComponent implements OnInit {
   pelicula: any = {};
   funciones: { fecha: string; funciones: Funcion[]; }[] = []; // Array para almacenar funciones agrupadas por fecha
 
-
   constructor(private PeliculaService: PeliculasService, private FuncionesService: FuncionesService) { }
-
   // Método ngOnInit que se ejecuta al inicializar el componente
   ngOnInit() {
     // Llamada al servicio para obtener los detalles de la película
