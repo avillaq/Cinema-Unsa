@@ -17,14 +17,18 @@ export class ConfirmacionComponent implements OnInit{
   constructor(private pagosService:PagosService, private boletosService:BoletosService) { }
 
   ngOnInit() {
-    this.pagosService.getDatosPago(this.session_id).subscribe(
-      (data: any) => {
-        if(data.status == "complete"){
-          this.filtrarDatosPago(data);
-          this.registrarBoletos();
+    let estadoGuardado = localStorage.getItem("estado"+this.session_id);
+    if (!estadoGuardado) {
+      this.pagosService.getDatosPago(this.session_id).subscribe(
+        (data: any) => {
+          if (data.status == "complete") {
+            this.filtrarDatosPago(data);
+            this.registrarBoletos();
+            localStorage.setItem("estado"+this.session_id, 'true');
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   descargarRecibo(): void {
