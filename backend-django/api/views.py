@@ -126,7 +126,7 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
             respuesta.append(boleto)
 
         # Actualizamos los asientos ocupados
-        asientos_ocupar = data["asientos"].split(",")
+        asientos_ocupar = data["asientos"].split(", ")
 
         funcion.asientos_ocupados.extend(asientos_ocupar)
         funcion.save()

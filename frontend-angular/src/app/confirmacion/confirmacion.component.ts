@@ -17,14 +17,14 @@ export class ConfirmacionComponent implements OnInit{
   constructor(private pagosService:PagosService, private boletosService:BoletosService) { }
 
   ngOnInit() {
-    let estadoGuardado = localStorage.getItem("estado"+this.session_id);
+    let estadoGuardado = localStorage.getItem("estado_"+this.session_id);
     if (!estadoGuardado) {
       this.pagosService.getDatosPago(this.session_id).subscribe(
         (data: any) => {
           if (data.status == "complete") {
             this.filtrarDatosPago(data);
             this.registrarBoletos();
-            localStorage.setItem("estado"+this.session_id, 'true');
+            localStorage.setItem("estado_"+this.session_id, 'true');
           }
         }
       );
