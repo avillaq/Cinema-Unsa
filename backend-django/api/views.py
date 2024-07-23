@@ -166,17 +166,18 @@ class PeliculaListaRanking(generics.ListAPIView):
 # Vista para enviar correo con el recibo de compra
 @api_view(['POST'])
 def enviar_correo(request):
-    data = request.data
-    pdf = generate_pdf(request)
-    if pdf.status_code == 200:
+    context = request.data
+    context["fecha_actual"] = date.today().strftime("%d/%m/%y")
+    pdf = render_to_pdf('invoice.html', context)
+    if pdf:
         # Enviamos el correo
-        email = data["email"]
+        email = context["email"]
         asunto = "Recibo de compra - CinemaUNSA"
         mensaje = "Gracias por su compra"
         pdf_content = pdf.content
 
         msg = EmailMultiAlternatives(asunto, mensaje, settings.EMAIL_HOST_USER, [email])
-        msg.attach("recibo.pdf", pdf_content, "application/pdf")
+        msg.attach("Recibo_Compra.pdf", pdf_content, "application/pdf")
         msg.send()
 
         return Response({"mensaje": "Correo enviado"}, status=200)

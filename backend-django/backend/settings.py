@@ -140,6 +140,6 @@ STRIPE_PUBLIC_KEY = "pk_test_51PcEIjRpc8Awm1hPGYRiuEXxWy9iWO5pJgsBVQeGdSK8SyoxLZ
 # Configuración para enviar correos
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "avillafuerteq@gmail.com"
+EMAIL_HOST_USER = "avillafuerteq@unsa.edu.pe"
 EMAIL_HOST_PASSWORD = "rbdg tbrb yfdd xeng"
 EMAIL_USE_TLS = True
