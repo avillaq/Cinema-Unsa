@@ -138,7 +138,7 @@ STRIPE_SECRET_KEY = "sk_test_51PcEIjRpc8Awm1hPpjc365C5vryPHq7HFd6xSwNQXc1oXx5bdG
 STRIPE_PUBLIC_KEY = "pk_test_51PcEIjRpc8Awm1hPGYRiuEXxWy9iWO5pJgsBVQeGdSK8SyoxLZUiYJknlO4dv7d0mZzMpkYJ3MYDQTLpSzbTC9L100HLKAVBM8"
 
 # Configuración para enviar correos
-EMAIL_HOST = "smtp.googlemail.com"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "avillafuerteq@gmail.com"
 EMAIL_HOST_PASSWORD = "rbdg tbrb yfdd xeng"
