@@ -34,14 +34,12 @@ class PeliculaDetalle(generics.RetrieveUpdateDestroyAPIView):
 
 class FuncionListaPorPelicula(generics.ListCreateAPIView):
     serializer_class = FuncionSerializer
-
     def get_queryset(self):
         pelicula_id = self.kwargs['pelicula_id']
         return Funcion.objects.filter(pelicula_id=pelicula_id)
 
 class FuncionDetallePorPelicula(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = FuncionSerializer
-
     def get_queryset(self):
         pelicula_id = self.kwargs['pelicula_id']
         return Funcion.objects.filter(pelicula_id=pelicula_id)
@@ -77,8 +75,6 @@ def create_checkout_session(request):
                 },
             ],
             metadata=metadata,
-            
-            
         )
         return Response({'id': checkout_session.id})
     except Exception as e:
@@ -182,6 +178,7 @@ def enviar_correo(request):
         mensaje = "Gracias por su compra"
         pdf_content = pdf.content
 
+        # Enviamos el correo con el recibo de compra
         msg = EmailMultiAlternatives(asunto, mensaje, settings.EMAIL_HOST_USER, [email])
         msg.attach_alternative(contenido, "text/html")
         msg.attach("Recibo_Compra.pdf", pdf_content, "application/pdf")
