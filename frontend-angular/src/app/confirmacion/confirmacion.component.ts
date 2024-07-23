@@ -42,6 +42,13 @@ export class ConfirmacionComponent implements OnInit{
       window.URL.revokeObjectURL(url);
     });
   }
+  enviarCorreo(): void {
+    this.pagosService.enviarCorreo(this.datosFiltrados).subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
+  }
   registrarBoletos(): void {
     this.boletosService.registrarBoletos(this.datosFiltrados).subscribe(
       (data: any) => {
