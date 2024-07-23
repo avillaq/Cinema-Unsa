@@ -36,7 +36,7 @@ class Funcion(models.Model):
 
 class Boleto(models.Model):
     funcion = models.ForeignKey(Funcion, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=50, choices=[("adulto", "Adulto"), ("niño", "Niño")])
     cantidad = models.PositiveIntegerField(default=0)
     monto_total = models.DecimalField(max_digits=6, decimal_places=2, default=0)

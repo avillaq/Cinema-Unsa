@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .models import Pelicula, Funcion, Boleto
+from .models import Pelicula, Funcion, Boleto, Usuario
 from .serializers import PeliculaSerializer, FuncionSerializer, BoletoSerializer
 
 import stripe
@@ -111,9 +111,11 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
         data = request.data
         respuesta = []
         # Creamos al usuario si no existe
-        user, created = User.objects.get_or_create(
+        user, created = Usuario.objects.get_or_create(
             username=data["nombre"],
-            email=data["email"]
+            email=data["email"],
+            dni=data["dni"],
+            telefono=data["telefono"]
         )
         funcion = Funcion.objects.get(pk=data["funcion"])
         # Generamos un código de compra único para poder diferenciar la compra
