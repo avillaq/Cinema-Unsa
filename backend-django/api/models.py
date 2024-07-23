@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Usuario(models.Model):
-    username = models.CharField(max_length=50, unique=True)
+    username = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    dni = models.CharField(max_length=8)
+    dni = models.CharField(max_length=8, unique=True)
     telefono = models.CharField(max_length=15)
 
     def __str__(self):
