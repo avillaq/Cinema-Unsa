@@ -15,8 +15,12 @@ from django.http import HttpResponse
 from .renderes import render_to_pdf, render_html
 from django.core.mail import EmailMultiAlternatives
 from datetime import date
+import locale
 from django.db.models import Avg
 import uuid
+
+# configuracion para obtener los nombres de los meses en español
+locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # Clave secreta de stripe
 
@@ -93,7 +97,7 @@ def get_session_data(request, session_id):
 @api_view(['POST'])
 def generate_pdf(request):
     context = request.data
-    context["fecha_actual"] = date.today().strftime("%d/%m/%y")
+    context["fecha_actual"] = date.today().strftime("%d de %B de %Y")
     pdf = render_to_pdf('invoice.html', context)
     if pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
@@ -167,7 +171,7 @@ class PeliculaListaRanking(generics.ListAPIView):
 @api_view(['POST'])
 def enviar_correo(request):
     context = request.data
-    context["fecha_actual"] = date.today().strftime("%d/%m/%y")
+    context["fecha_actual"] = date.today().strftime("%d de %B de %Y")
     pdf = render_to_pdf('invoice.html', context)
     if pdf:
         # Configuracion del template del correo
