@@ -6,143 +6,109 @@
     <title>Recibo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #3b4a6b;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
-        .receipt {
+        .contenedor {
             background-color: #ffffff;
-            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 400px;
+            padding: 20px; 
+            margin: auto;
         }
-        .receipt-header {
+        .header {
             text-align: center;
-            margin-bottom: 20px;
         }
-        .receipt-header img {
-            width: 50px;
-            height: 50px;
-        }
-        .receipt-header h1 {
-            font-size: 1.5em;
+        .header h1{
             margin: 0.5em 0;
         }
-        .receipt-header p {
-            margin: 0;
-        }
-        .receipt-details {
+        .detalles {
             margin-bottom: 20px;
         }
-        .receipt-details p {
+        .detalles p {
             margin: 5px 0;
-            display: flex;
-            justify-content: space-between;
         }
-        .receipt-details .amount {
-            font-size: 2em;
-            font-weight: bold;
-        }
-        .receipt-details .download {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .receipt-details .download a {
-            text-decoration: none;
-            color: #3b4a6b;
-            font-weight: bold;
-        }
-        .receipt-items {
+        .contenedor-tabla {
             margin-top: 20px;
         }
-        .receipt-items h2 {
+        .contenedor-tabla h2 {
             margin: 0;
             font-size: 1.2em;
             border-bottom: 1px solid #e0e0e0;
             padding-bottom: 5px;
         }
-        .receipt-items table {
+        table {
             width: 100%;
             border-collapse: collapse;
         }
-        .receipt-items table th, .receipt-items table td {
+        table th, table td {
             padding: 10px;
             text-align: left;
         }
-        .receipt-items table th {
+        table th {
             background-color: #f5f5f5;
         }
-        .receipt-items table td {
+        table td {
             border-bottom: 1px solid #e0e0e0;
         }
-        .receipt-items .total {
+        .total {
             font-weight: bold;
         }
-        .receipt-footer {
-            margin-top: 20px;
+        .footer {
             text-align: center;
+            margin-top: 20px;
         }
-        .receipt-footer p {
-            margin: 5px 0;
+        .footer a {
+            text-decoration: none;
+            color: #3b4a6b;
         }
     </style>
 </head>
-<body>
-    <div class="receipt">
-        <div class="receipt-header">
+<body style="background-color: #3b4a6b; padding: 20px;">
+    <div class="contenedor">
+        <div class="header">
             <h1>CinemaUNSA</h1>
-            <p>Receipt from CinemaUNSA</p>
-            <p class="amount">PEN80.00</p>
-            <p>Paid July 14, 2024</p>
-            <div class="download">
-                <a href="#">⬇ Download invoice</a>
-                <a href="#">⬇ Download receipt</a>
-            </div>
+            <p>Recibo de CinemaUNSA</p>
+            <h1>S/ {{ total_monto|floatformat:2 }}</h1>
+            <p>Pagado el {{ fecha_actual }}</p>
         </div>
-        <div class="receipt-details">
-            <p><strong>Receipt number:</strong> <span>2073-8675</span></p>
-            <p><strong>Invoice number:</strong> <span>83EFF8C4-0001</span></p>
-            <p><strong>Payment method:</strong> <span>VISA - 4242</span></p>
+        <div class="detalles">
+            <p><strong>Numero de recibo:</strong> <span>1001</span></p>
+            <p><strong>Metodo de Pago:</strong> <span>VISA</span></p>
         </div>
-        <div class="receipt-items">
-            <h2>Receipt #2073-8675</h2>
+        <div class="contenedor-tabla">
+            <h2>Recibo #1001</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Item</th>
-                        <th>Price</th>
+                        <th>Producto</th>
+                        <th>Monto</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Camilla 2<br><span>Qty 1</span></td>
-                        <td>PEN50.00</td>
-                    </tr>
-                    <tr>
-                        <td>Anteojos<br><span>Qty 2</span></td>
-                        <td>PEN30.00<br><small>PEN15.00 each</small></td>
-                    </tr>
+                    {% for item in boletos %}
+                        <tr>
+                            <td>Boleto {{item.tipo}}<br><span>Cant. {{item.cantidad}}</span></td>
+                            {% if item.cantidad > 1 %}
+                                <td>S/ {{item.monto|floatformat:2}}<br><small>S/ {{item.precio|floatformat:2}} cada uno</small></td>
+                            {% else %}
+                            <td>S/ {{item.monto|floatformat:2}}</td>
+                            {% endif %}
+                        </tr>
+					{% endfor %}
                     <tr class="total">
                         <td>Total</td>
-                        <td>PEN80.00</td>
+                        <td>S/ {{ total_monto|floatformat:2 }}</td>
                     </tr>
                     <tr class="total">
-                        <td>Amount paid</td>
-                        <td>PEN80.00</td>
+                        <td>Total pagado</td>
+                        <td>S/ {{ total_monto|floatformat:2 }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="receipt-footer">
-            <p>Questions? Contact us at <a href="mailto:villafuertequispealex@gmail.com">villafuertequispealex@gmail.com</a></p>
+        <div class="footer">
+            <p>Contactanos en <a href="mailto:avillafuerteq@unsa.edu.pe">avillafuerteq@unsa.edu.pe</a></p>
         </div>
     </div>
 </body>

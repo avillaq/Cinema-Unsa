@@ -121,17 +121,17 @@
 								<td>{{ forloop.counter }}</td>
 								<td>Boleto {{item.tipo}}</td>
 								<td>{{item.cantidad}}</td>
-								<td>S/ {{item.monto}}</td>
+								<td>S/ {{item.monto|floatformat:2}}</td>
 							</tr>
 						{% endfor %}
 						
 						<tr>
 							<td colspan="3" class="text-right">Sub Total:</td>
-							<td>S/ {{total_monto}}</td>
+							<td>S/ {{total_monto|floatformat:2}}</td>
 						</tr>
 						<tr>
 							<td colspan="3" class="text-right">Total Pago:</td>
-							<td><strong>S/ {{total_monto}}</strong></td>
+							<td><strong>S/ {{total_monto|floatformat:2}}</strong></td>
 						</tr>
 					</tbody>
 				</table>
