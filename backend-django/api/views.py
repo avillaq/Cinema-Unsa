@@ -12,7 +12,7 @@ from django.conf import settings
 import json
 
 from django.http import HttpResponse
-from .renderes import render_to_pdf 
+from .renderes import render_to_pdf, render_html
 from django.core.mail import EmailMultiAlternatives
 from datetime import date
 from django.db.models import Avg
@@ -170,6 +170,8 @@ def enviar_correo(request):
     context["fecha_actual"] = date.today().strftime("%d/%m/%y")
     pdf = render_to_pdf('invoice.html', context)
     if pdf:
+        # Configuracion del template del correo
+        contenido = render_html("correo.html", context)
         # Enviamos el correo
         email = context["email"]
         asunto = "Recibo de compra - CinemaUNSA"
@@ -177,6 +179,7 @@ def enviar_correo(request):
         pdf_content = pdf.content
 
         msg = EmailMultiAlternatives(asunto, mensaje, settings.EMAIL_HOST_USER, [email])
+        msg.attach_alternative(contenido, "text/html")
         msg.attach("Recibo_Compra.pdf", pdf_content, "application/pdf")
         msg.send()
 
