@@ -13,11 +13,12 @@ import json
 
 from django.http import HttpResponse
 from .renderes import render_to_pdf 
+from django.core.mail import EmailMultiAlternatives
 from datetime import date
 from django.db.models import Avg
 import uuid
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe.api_key = settings.STRIPE_SECRET_KEY # Clave secreta de stripe
 
 class PeliculaLista(generics.ListCreateAPIView):
     queryset = Pelicula.objects.all()
@@ -79,6 +80,7 @@ def create_checkout_session(request):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 
+# Obtener los datos de la sesión de pago
 @api_view(['GET'])
 def get_session_data(request, session_id):
     try:
@@ -87,6 +89,7 @@ def get_session_data(request, session_id):
     except Exception as e:
         return Response({'error': str(e)}, status=500)
 
+# Generar el PDF del recibo de compra
 @api_view(['POST'])
 def generate_pdf(request):
     context = request.data
@@ -134,7 +137,8 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
         # Serializamos los objetos de la lista "respuesta"
         serializer = BoletoSerializer(respuesta, many=True)
         return Response(serializer.data, status=201)
-    
+
+# Ranking de películas
 class PeliculaListaRanking(generics.ListAPIView):
     serializer_class = PeliculaSerializer
 
@@ -158,3 +162,22 @@ class PeliculaListaRanking(generics.ListAPIView):
         ranked_peliculas = [pelicula[0] for pelicula in ranking]
 
         return ranked_peliculas
+
+# Vista para enviar correo con el recibo de compra
+@api_view(['POST'])
+def enviar_correo(request):
+    data = request.data
+    pdf = generate_pdf(request)
+    if pdf.status_code == 200:
+        # Enviamos el correo
+        email = data["email"]
+        asunto = "Recibo de compra - CinemaUNSA"
+        mensaje = "Gracias por su compra"
+        pdf_content = pdf.content
+
+        msg = EmailMultiAlternatives(asunto, mensaje, settings.EMAIL_HOST_USER, [email])
+        msg.attach("recibo.pdf", pdf_content, "application/pdf")
+        msg.send()
+
+        return Response({"mensaje": "Correo enviado"}, status=200)
+    return Response({"mensaje": "Error al enviar el correo"}, status=500)
