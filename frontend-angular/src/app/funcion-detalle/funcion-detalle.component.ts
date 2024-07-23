@@ -81,6 +81,8 @@ export class FuncionDetalleComponent implements OnInit{
       this.hora = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
 
       this.sala = data.sala;
+      this.listaAsientosOcupados = data.asientos_ocupados;
+      console.log(this.listaAsientosOcupados);
     });
 
     // (3 paso) Validación del formulario de pago  
@@ -95,6 +97,7 @@ export class FuncionDetalleComponent implements OnInit{
   // (1 paso del stepper) Variables y Funciones para la selección de asientos
 
   listaAsientosSeleccionados: any []= [];
+  listaAsientosOcupados: any []= [];
   numeroAsientosSeleccionados: number = 0;
   codigosAsientosSeleccionados: string = '';
 
@@ -140,6 +143,14 @@ export class FuncionDetalleComponent implements OnInit{
       this.codigosAsientosSeleccionados += asiento.letraFila + asiento.numeroAsiento + ', ';
     });
     this.codigosAsientosSeleccionados = this.codigosAsientosSeleccionados.slice(0, -2);
+  }
+
+  isOcupado(letraFila:any,numeroAsiento:any) {
+    const datoReserva =  this.listaAsientosOcupados.find(m=>m === (letraFila+numeroAsiento));
+    if(datoReserva == undefined) {
+      return false
+    }  
+    return true
   }
 
   // Validación del primer paso del stepper

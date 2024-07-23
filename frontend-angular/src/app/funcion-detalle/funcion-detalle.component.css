@@ -105,3 +105,9 @@ p.text {
 p.text span {
  color: #6feaf6;
 }
+
+.ocupado {
+    background-color: #fff;
+    color: #444451;
+    pointer-events: none; /* Desactivamos el asiento */
+}
