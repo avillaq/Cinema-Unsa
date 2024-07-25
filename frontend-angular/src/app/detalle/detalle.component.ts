@@ -47,7 +47,8 @@ export class DetalleComponent implements OnInit {
 
     // Iteramos sobre cada función
     funciones.forEach((funcion: Funcion) => {
-      const fecha = new Date(funcion.horario).toDateString(); // Convertimos el horario a una fecha legible
+      // Obtenemos la fecha de la función en formato dd de mes de aaaa
+      const fecha = new Date(funcion.horario).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
       if (!funcionesAgrupadas[fecha]) {
         funcionesAgrupadas[fecha] = [];
       }
@@ -63,7 +64,7 @@ export class DetalleComponent implements OnInit {
       funciones: funcionesAgrupadas[fecha].map(funcion => ({
         id: funcion.id,
         // Formateamos el horario
-        horario: new Date(funcion.horario).getHours() + ':' + new Date(funcion.horario).getMinutes(),
+        horario: new Date(funcion.horario).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit'}),
         pelicula: funcion.pelicula,
         sala: funcion.sala,
       })),
