@@ -113,9 +113,11 @@ class BoletoListaRegistrar(generics.ListCreateAPIView):
         # Creamos al usuario si no existe
         user, created = Usuario.objects.get_or_create(
             username=data["nombre"],
-            email=data["email"],
-            dni=data["dni"],
-            telefono=data["telefono"]
+            defaults={
+                "email": data["email"], 
+                "dni": data["dni"], 
+                "telefono": data["telefono"]
+                }
         )
         funcion = Funcion.objects.get(pk=data["funcion"])
         # Generamos un código de compra único para poder diferenciar la compra
