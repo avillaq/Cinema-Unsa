@@ -3,6 +3,7 @@ import { PeliculasService } from '../peliculas.service';
 import { DatePipe } from '@angular/common'; // Importamos DatePipe para formatear fechas
 import { FuncionesService } from '../funciones.service'; 
 import { RouterLink } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 // Definimos una interfaz para las funciones de películas
 interface Funcion {
@@ -25,8 +26,9 @@ export class DetalleComponent implements OnInit {
   pelicula: any = {};
   funciones: { fecha: string; funciones: Funcion[]; }[] = []; // Array para almacenar funciones agrupadas por fecha
 
+  @Input("cancel") cancel: string = ""; 
 
-  constructor(private PeliculaService: PeliculasService, private FuncionesService: FuncionesService) { }
+  constructor(private PeliculaService: PeliculasService, private FuncionesService: FuncionesService, private matsnackbar: MatSnackBar) { }
 
   // Método ngOnInit que se ejecuta al inicializar el componente
   ngOnInit() {
@@ -39,6 +41,12 @@ export class DetalleComponent implements OnInit {
     this.FuncionesService.getFunciones(this.pelicula_id).subscribe((data: Object) => {
       this.funciones = this.agruparFuncionesPorFecha(data as Funcion[]); // Agrupamos las funciones por fecha
     });
+
+    // Si se cancela la compra, se muestra un mensaje
+    if (this.cancel) {
+      this.mostrarMensaje();
+    }
+    
   }
 
   // Método para agrupar funciones por fecha
@@ -71,5 +79,9 @@ export class DetalleComponent implements OnInit {
     }));
   }
 
-  
+  mostrarMensaje() {
+    this.matsnackbar.open("Compra cancelada", "Ok", {
+      duration: 3000,
+    });
+  }
 }
