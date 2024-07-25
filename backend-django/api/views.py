@@ -60,12 +60,16 @@ def create_checkout_session(request):
         # Serializar los valores de metadata a cadenas JSON
         metadata = {key: json.dumps(value) if isinstance(value, dict) else str(value) for key, value in request.data.items()}
 
+        # Id de pelicula cuando se cancela la compra
+        id_funcion = request.data["funcion"]
+        id_pelicula = Funcion.objects.get(pk=id_funcion).pelicula.id
+
         checkout_session = stripe.checkout.Session.create(
             line_items=compras,
             phone_number_collection={"enabled": True},
             mode='payment',
             success_url='http://localhost:4200/pago/confirmacion?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url='http://localhost:4200/',
+            cancel_url='http://localhost:4200/peliculas/'+str(id_pelicula)+'?cancel=true',
             custom_fields=[
                 {
                     "key": "DNI",
