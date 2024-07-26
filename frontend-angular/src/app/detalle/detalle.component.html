@@ -17,13 +17,13 @@
   
   <section class="flex flex-col md:flex-row w-[80%] mx-auto justify-center items-center">
     <mat-accordion>
-      <mat-expansion-panel (closed)="pausarVideo()">
+      <mat-expansion-panel (closed)="pausarVideo()" disabled={{pelicula.trailer_url?false:true}}>
         <mat-expansion-panel-header>
-          <mat-panel-title class="flex justify-center"> Ver trailer </mat-panel-title>
+          <mat-panel-title class="flex justify-center"> {{ pelicula.trailer_url? "Ver trailer":"Trailer no disponible" }}</mat-panel-title>
         </mat-expansion-panel-header>
 
             <youtube-player
-            videoId="CzpD1Qb8vMY"
+            videoId="{{ pelicula.trailer_url }}"
             (stateChange)="onStateChange($event)">
           </youtube-player>
 
