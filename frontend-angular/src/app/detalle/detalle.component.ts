@@ -81,9 +81,22 @@ export class DetalleComponent implements OnInit {
     }));
   }
 
-  mostrarMensaje() {
+  mostrarMensaje() { // Método para mostrar mensaje de compra cancelada
     this.matsnackbar.open("Compra cancelada", "Ok", {
       duration: 3000,
     });
   }
+  
+  player: any; // Variable para almacenar el reproductor de YouTube
+  onStateChange(event: any) {
+    if (event.data === 1) {
+      this.player = event.target;
+    }
+  }
+
+  // Cuando el modal se cierra, pausamos el video
+  pausarVideo() {
+    this.player.pauseVideo();
+  }
+
 }
