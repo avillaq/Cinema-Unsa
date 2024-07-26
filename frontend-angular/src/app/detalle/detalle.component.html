@@ -21,7 +21,12 @@
         <mat-expansion-panel-header>
           <mat-panel-title class="flex justify-center"> Ver trailer </mat-panel-title>
         </mat-expansion-panel-header>
-        <iframe width="550" height="315" src="https://www.youtube.com/embed/CzpD1Qb8vMY?si=jCllYC0uWhWgD3Q2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+            <youtube-player
+            videoId="CzpD1Qb8vMY"
+            (stateChange)="onStateChange($event)">
+          </youtube-player>
+
       </mat-expansion-panel>
     </mat-accordion>
   </section>
