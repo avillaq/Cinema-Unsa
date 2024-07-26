@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common'; // Importamos DatePipe para formatea
 import { FuncionesService } from '../funciones.service'; 
 import { RouterLink } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // Definimos una interfaz para las funciones de películas
 interface Funcion {
@@ -16,7 +17,7 @@ interface Funcion {
 @Component({
   selector: 'app-detalle', 
   standalone: true, 
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, MatExpansionModule],
   templateUrl: './detalle.component.html',
   styleUrl: './detalle.component.css' 
 })
