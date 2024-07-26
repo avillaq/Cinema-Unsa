@@ -14,6 +14,18 @@
       </div>
     </div>
   </section>
+  
+  <section class="flex flex-col md:flex-row w-[80%] mx-auto justify-center items-center">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="flex justify-center"> Ver trailer </mat-panel-title>
+        </mat-expansion-panel-header>
+        <iframe width="550" height="315" src="https://www.youtube.com/embed/CzpD1Qb8vMY?si=jCllYC0uWhWgD3Q2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+
   <section class="lg:w-4/5 mx-auto flex flex-wrap justify-center items-center flex-col p-4">
     <h1 class="text-gray-900 text-3xl title-font font-medium my-10">Próximas Funciones</h1>
     @for (funcion of funciones; track $index) {
