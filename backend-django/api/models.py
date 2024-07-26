@@ -18,6 +18,7 @@ class Pelicula(models.Model):
     duracion = models.PositiveIntegerField()   # minutos
     director = models.CharField(max_length=100)
     poster_url = models.URLField(max_length=200)    # imagen
+    trailer_url = models.URLField(max_length=200, default="")
     total_votos = models.PositiveIntegerField(default=0)
     promedio_votos = models.FloatField(default=0)
     tmdb_id = models.PositiveIntegerField(unique=True)
