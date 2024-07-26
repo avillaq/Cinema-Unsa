@@ -5,6 +5,7 @@ import { FuncionesService } from '../funciones.service';
 import { RouterLink } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {YouTubePlayer} from '@angular/youtube-player';
 
 // Definimos una interfaz para las funciones de películas
 interface Funcion {
@@ -17,7 +18,7 @@ interface Funcion {
 @Component({
   selector: 'app-detalle', 
   standalone: true, 
-  imports: [DatePipe, RouterLink, MatExpansionModule],
+  imports: [DatePipe, RouterLink, MatExpansionModule, YouTubePlayer],
   templateUrl: './detalle.component.html',
   styleUrl: './detalle.component.css' 
 })
