@@ -8,13 +8,13 @@ export class PeliculasService {
   constructor( private http: HttpClient ) {}
 
   getPeliculas() {
-    return this.http.get('https://proyecto-pw2-backend-production.up.railway.app/api/peliculas/')
+    return this.http.get('https://cinemaunsa-api.up.railway.app/api/peliculas/')
     
   }
   getPelicula(id: number) {
-    return this.http.get("https://proyecto-pw2-backend-production.up.railway.app/api/peliculas/" + id + "/") 
+    return this.http.get("https://cinemaunsa-api.up.railway.app/api/peliculas/" + id + "/") 
   }
   getRankingPeliculas() {
-    return this.http.get("https://proyecto-pw2-backend-production.up.railway.app/api/peliculas/ranking") 
+    return this.http.get("https://cinemaunsa-api.up.railway.app/api/peliculas/ranking") 
   }
 }

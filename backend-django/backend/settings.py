@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-5vg3@6*vadf3=&6fydt6%_vt)evp9%ji4%bht%_llty0u@0vpd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["proyecto-pw2-backend-production.up.railway.app",'127.0.0.1','localhost']
+ALLOWED_HOSTS = ["cinemaunsa-api.up.railway.app",'127.0.0.1','localhost']
 
-CSRF_TRUSTED_ORIGINS = ["http://*","https://proyecto-pw2-backend-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["http://*","https://cinemaunsa-api.up.railway.app"]
 
 # Application definition
 

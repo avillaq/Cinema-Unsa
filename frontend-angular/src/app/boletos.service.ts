@@ -9,7 +9,7 @@ export class BoletosService {
   constructor(private http:HttpClient) { }
 
   registrarBoletos(datos:any){
-    return this.http.post("https://proyecto-pw2-backend-production.up.railway.app/api/compra/boletos/", datos)
+    return this.http.post("https://cinemaunsa-api.up.railway.app/api/compra/boletos/", datos)
     
   }
 
