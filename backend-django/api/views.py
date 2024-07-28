@@ -15,12 +15,12 @@ from django.http import HttpResponse
 from .renderes import render_to_pdf, render_html
 from django.core.mail import EmailMultiAlternatives
 from datetime import date
-import locale
+#import locale
 from django.db.models import Avg
 import uuid
 
 # configuracion para obtener los nombres de los meses en español
-locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+#locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
 stripe.api_key = settings.STRIPE_SECRET_KEY # Clave secreta de stripe
 
