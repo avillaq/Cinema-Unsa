@@ -61,7 +61,7 @@ En el frontend tenemos los siguientes:
 
 -   **Vistas de películas**: Secciones que muestran la lista de películas, detalles de cada película con sus funciones y ranking de las películas más populares.
 -   **Proceso de compra**: Serie de pasos que el usuario debe realizar donde selecciona butacas, cantidad de boletos y procesar el pago.
--   **Confirmación de pago**: Sección que muestra la confirmación de la compra con la opción de descargar el recibo.
+-   **Confirmación de pago**: Sección que muestra la confirmación de la compra con la opción de descargar y enviar al correo el recibo de compra.
 
 ### Implementación del Backend
 
@@ -82,6 +82,7 @@ Las vistas en el backend se implementan utilizando Django REST Framework, que fa
 5.  **create_checkout_session**: Crea una sesión de pago con Stripe, configurando los productos y precios, y especificando las URL de éxito y cancelación.
 6.  **get_session_data**: Recupera los datos de una sesión de Stripe utilizando el ID de la sesión.
 7.  **generate_pdf**: Genera un recibo de compra en formato PDF.
+8.  **enviar_correo**: Envia el recibo de compra al correo.
 
 ### Implementación del Frontend
 El frontend se desarrolla en Angular, separando la lógica de la aplicación en servicios, componentes y módulos.
@@ -99,7 +100,7 @@ El frontend se desarrolla en Angular, separando la lógica de la aplicación en 
 2.  **DetallesPeliculaComponent**: Muestra los detalles de una película específica.
 3.  **ListaFuncionesComponent**: Muestra las funciones de una película.
 4.  **ProcesoCompraComponent**: Implementa el proceso de compra, gestionando la selección de butacas, cantidad de boletos y procesamiento de pagos con Stripe.
-5.  **ConfirmacionPagoComponent**: Muestra la confirmación de la compra, permitiendo descargar el recibo.
+5.  **ConfirmacionPagoComponent**: Muestra la confirmación de la compra, permitiendo descargar y enviar al correo el recibo.
 
 **Integración con Stripe**
 Se implementa la integración de Stripe para el procesamiento de pagos en línea. Los usuarios pueden realizar pagos utilizando diversas tarjetas de crédito y débito. La seguridad de las transacciones se garantiza mediante la encriptación de datos y la utilización de tokens seguros.
