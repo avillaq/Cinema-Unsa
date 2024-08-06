@@ -41,3 +41,5 @@ Thumbs.db
 .venv
 __pycache__
 staticfiles
+Obtener Peliculas.txt
+.env
