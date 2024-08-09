@@ -68,8 +68,8 @@ def create_checkout_session(request):
             line_items=compras,
             phone_number_collection={"enabled": True},
             mode='payment',
-            success_url='https://cinemaunsa.netlify.app/pago/confirmacion?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url='https://cinemaunsa.netlify.app/peliculas/'+str(id_pelicula)+'?cancel=true',
+            success_url='http://localhost:4200/pago/confirmacion?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url='http://localhost:4200/peliculas/'+str(id_pelicula)+'?cancel=true',
             custom_fields=[
                 {
                     "key": "DNI",

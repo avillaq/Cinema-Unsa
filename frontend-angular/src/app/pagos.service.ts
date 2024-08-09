@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { loadStripe } from '@stripe/stripe-js';
 import { map } from 'rxjs';
+import { environment } from '../environments';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,10 @@ import { map } from 'rxjs';
 export class PagosService {
   constructor( private http: HttpClient ) {}
 
-  private stripeAPIKey: any = 'pk_test_51PcEIjRpc8Awm1hPGYRiuEXxWy9iWO5pJgsBVQeGdSK8SyoxLZUiYJknlO4dv7d0mZzMpkYJ3MYDQTLpSzbTC9L100HLKAVBM8';
+  private stripeAPIKey: any = environment.contentful.stripeAPIKey;
 
   procesarPago(Datos: any) {
-    return this.http.post("https://cinemaunsa-api.up.railway.app/api/compra/create-checkout-session/", Datos).pipe(
+    return this.http.post(`${environment.contentful.backendURL}/api/compra/create-checkout-session/`, Datos).pipe(
       map(async (res: any) => {
         const stripe = await loadStripe(this.stripeAPIKey);
         stripe?.redirectToCheckout({

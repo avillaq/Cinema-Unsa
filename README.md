@@ -11,10 +11,6 @@ Este artículo presenta la implementación de un Sistema Web para la compra de b
 
 Los resultados obtenidos demuestran la efectividad del sistema en mejorar la eficiencia y comodidad tanto para los usuarios como para los administradores de cines. La plataforma permite a los usuarios realizar compras de boletos de manera rápida y segura, seleccionar asientos y recibir confirmaciones de pago en tiempo real. Para los administradores, el sistema facilita la gestión de funciones y ventas, optimizando la actualización de información y la administración de pagos. Esta solución no solo responde a la creciente demanda de servicios en línea, sino que también contribuye a una mejor experiencia del cliente y una operatividad interna más eficiente.
 
-**Despliegue**:
-- [Despliegue Backend](https://cinemaunsa-api.up.railway.app/admin)
-- [Despliegue Frontend](https://cinemaunsa.netlify.app/)
-
 ## Introducción
 
 En el presente panorama digital, el acceso a Internet y el uso de tecnologías web han alcanzado niveles sin precedentes. Con más de 1.13 mil millones de sitios web registrados, aunque solo 200 millones están activos, la web continúa expandiéndose a un ritmo acelerado [1]. Esta tendencia se debe a la creciente demanda de servicios en línea que faciliten la vida cotidiana, permitiendo realizar una amplia gama de actividades sin necesidad de presencia física.
